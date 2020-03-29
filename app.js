@@ -5,7 +5,11 @@ const app = express();
 app.use(express.json());
 
 app.get('/api/books', (req, res) => {
-    res.status(200).json({ message: 'Hello from the server side', app: "booksreview"});
+    res.status(200).json({ message: 'These are all books', app: "booksreview"});
+});
+
+app.post('/api/books', (req, res) => {
+    res.status(200).json({ message: 'New book added', app: "booksreview"});
 });
 
 module.exports = app;
