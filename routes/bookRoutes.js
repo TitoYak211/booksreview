@@ -1,5 +1,6 @@
 const express = require('express');
 
+// Routes handlers
 const getAllBooks = (req, res) => {
     res.status(200).json({ message: 'These are all books', app: "booksreview" });
 };
@@ -23,6 +24,7 @@ const deleteBook = (req, res) => {
     res.status(204).json({ message: 'Delete a book given id', app: "booksreview"});
 };
 
+// Routes
 const router = express.Router();
 
 router.route('/').get(getAllBooks).post(addBook);
