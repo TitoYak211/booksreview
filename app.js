@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 
 app.use((req, res, next) => {
-    req.requesTime = new Date().toISOString;
+    req.requesTime = new Date().toISOString();
     next();
 });
 
