@@ -12,6 +12,7 @@ app.use((req, res, next) => {
     next();
 });
 
+// Routes handlers
 const getAllBooks = (req, res) => {
     res.status(200).json({ message: 'These are all books', app: "booksreview" });
 };
@@ -58,10 +59,18 @@ const deleteUser = (req, res) => {
     res.status(204).json({ message: 'Delete a user given an id', app: "booksreview"});
 };
 
-app.route('/api/books').get(getAllBooks).post(addBook);
-app.route('/api/books/:id').get(getBook).patch(updateBook).delete(deleteBook);
+// Routes
+const bookRouter = express.Router();
+const userRouter = express.Router();
 
-app.route('/api/users').get(getAllUsers).post(addUser);
-app.route('/api/users/:id').get(getUser).patch(updateUser).delete(deleteUser);
+bookRouter.route('/').get(getAllBooks).post(addBook);
+bookRouter.route('/:id').get(getBook).patch(updateBook).delete(deleteBook);
+
+app.use('/api/books', bookRouter);
+
+userRouter.route('/').get(getAllUsers).post(addUser);
+userRouter.route('/:id').get(getUser).patch(updateUser).delete(deleteUser);
+
+app.use('/api/users', userRouter);
 
 module.exports = app;
