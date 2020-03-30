@@ -14,12 +14,17 @@ app.get('/api/books/:id', (req, res) => {
 });
 
 app.post('/api/books', (req, res) => {
-    res.status(200).json({ message: 'New book added', app: "booksreview"});
+    res.status(201).json({ message: 'New book added', app: "booksreview"});
 });
 
 app.patch('/api/books/:id', (req, res) => {
     const id = req.params.id * 1;
     res.status(200).json({ message: 'Update a book given id', app: "booksreview"});
+});
+
+app.delete('/api/books/:id', (req, res) => {
+    const id = req.params.id * 1;
+    res.status(204).json({ message: 'Delete a book given id', app: "booksreview"});
 });
 
 module.exports = app;
