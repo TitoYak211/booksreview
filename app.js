@@ -7,8 +7,8 @@ const userRouter = require('./routes/userRoutes')
 
 // Use middlewares
 app.use(morgan('dev'));
-
 app.use(express.json());
+app.use(express.static(`{__dirname}/public`));
 
 app.use((req, res, next) => {
     req.requesTime = new Date().toISOString();
