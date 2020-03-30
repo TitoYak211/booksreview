@@ -6,6 +6,8 @@ const paramMiddlewares = require('./../controllers/paramMiddlewares');
 // Routes
 const router = express.Router();
 
+router.param('id', paramMiddlewares.checkID);
+
 router.route('/')
     .get(bookController.getAllBooks)
     .post(bookController.addBook);
