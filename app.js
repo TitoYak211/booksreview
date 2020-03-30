@@ -27,14 +27,7 @@ const deleteBook = (req, res) => {
     res.status(204).json({ message: 'Delete a book given id', app: "booksreview"});
 };
 
-app.get('/api/books', getAllBooks);
-
-app.get('/api/books/:id', getBook);
-
-app.post('/api/books', addBook);
-
-app.patch('/api/books/:id', updateBook);
-
-app.delete('/api/books/:id', deleteBook);
+app.route('/api/books').get(getAllBooks).post(addBook);
+app.route('/api/books/:id').get(getBook).patch(updateBook).delete(deleteBook);
 
 module.exports = app;
