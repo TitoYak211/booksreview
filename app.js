@@ -2,6 +2,8 @@ const express = require('express')
 const app = express();
 const morgan = require('morgan');
 
+const bookRouter = require('./routes/bookRoutes')
+
 // Use middlewares
 app.use(morgan('dev'));
 
@@ -13,29 +15,6 @@ app.use((req, res, next) => {
 });
 
 // Routes handlers
-const getAllBooks = (req, res) => {
-    res.status(200).json({ message: 'These are all books', app: "booksreview" });
-};
-
-const getBook = (req, res) => {
-    const id = req.params.id * 1;
-    res.status(200).json({ message: 'Get a book by id', app: "booksreview"});
-};
-
-const addBook = (req, res) => {
-    res.status(201).json({ message: 'New book added', app: "booksreview"});
-};
-
-const updateBook = (req, res) => {
-    const id = req.params.id * 1;
-    res.status(200).json({ message: 'Update a book given id', app: "booksreview"});
-};
-
-const deleteBook = (req, res) => {
-    const id = req.params.id * 1;
-    res.status(204).json({ message: 'Delete a book given id', app: "booksreview"});
-};
-
 const getAllUsers = (req, res) => {
     res.status(200).json({ message: 'These are all users', app: "booksreview" });
 };
@@ -60,11 +39,7 @@ const deleteUser = (req, res) => {
 };
 
 // Routes
-const bookRouter = express.Router();
 const userRouter = express.Router();
-
-bookRouter.route('/').get(getAllBooks).post(addBook);
-bookRouter.route('/:id').get(getBook).patch(updateBook).delete(deleteBook);
 
 app.use('/api/books', bookRouter);
 
