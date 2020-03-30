@@ -4,6 +4,11 @@ const app = express();
 // Use middlewares
 app.use(express.json());
 
+app.use((req, res, next) => {
+    req.requesTime = new Date().toISOString;
+    next();
+});
+
 const getAllBooks = (req, res) => {
     res.status(200).json({ message: 'These are all books', app: "booksreview" });
 };
