@@ -4,27 +4,37 @@ const app = express();
 // Use middlewares
 app.use(express.json());
 
-app.get('/api/books', (req, res) => {
-    res.status(200).json({ message: 'These are all books', app: "booksreview"});
-});
+const getAllBooks = (req, res) => {
+    res.status(200).json({ message: 'These are all books', app: "booksreview" });
+};
 
-app.get('/api/books/:id', (req, res) => {
+const getBook = (req, res) => {
     const id = req.params.id * 1;
     res.status(200).json({ message: 'Get a book by id', app: "booksreview"});
-});
+};
 
-app.post('/api/books', (req, res) => {
+const addBook = (req, res) => {
     res.status(201).json({ message: 'New book added', app: "booksreview"});
-});
+};
 
-app.patch('/api/books/:id', (req, res) => {
+const updateBook = (req, res) => {
     const id = req.params.id * 1;
     res.status(200).json({ message: 'Update a book given id', app: "booksreview"});
-});
+};
 
-app.delete('/api/books/:id', (req, res) => {
+const deleteBook = (req, res) => {
     const id = req.params.id * 1;
     res.status(204).json({ message: 'Delete a book given id', app: "booksreview"});
-});
+};
+
+app.get('/api/books', getAllBooks);
+
+app.get('/api/books/:id', getBook);
+
+app.post('/api/books', addBook);
+
+app.patch('/api/books/:id', updateBook);
+
+app.delete('/api/books/:id', deleteBook);
 
 module.exports = app;
