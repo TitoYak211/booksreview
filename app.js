@@ -9,7 +9,7 @@ app.get('/api/books', (req, res) => {
 });
 
 app.get('/api/books/:id', (req, res) => {
-    console.log(req.params);
+    const id = req.params.id * 1;
     res.status(200).json({ message: 'Get a book by id', app: "booksreview"});
 });
 
