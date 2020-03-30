@@ -15,7 +15,7 @@ app.use((req, res, next) => {
     next();
 });
 
-
+// Mounting routes for a nicer separation of resources
 app.use('/api/books', bookRouter);
 app.use('/api/users', userRouter);
 
