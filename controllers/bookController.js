@@ -3,7 +3,17 @@ const Book = require('./../models/bookModel');
 // Routes handlers
 exports.getAllBooks = async (req, res) => {
     try {
-        const books = await Book.find();
+        // buid a query
+        const queryObj = { ...req.query };
+        const removedFields = ['page', 'sort', 'limit', 'fields'];
+        removedFields.forEach(el => delete queryObj[el]);
+
+        const query = Book.find(queryObj);
+
+        // execute a query
+        const books = await query;
+
+        // send a response
         res.status(200).json({
             status: 'Success',
             result: books.length,
