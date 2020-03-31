@@ -42,7 +42,7 @@ exports.addBook = (req, res) => {
 
 exports.updateBook = async (req, res) => {
     try {
-        const book = Book.findByIdAndUpdate(req.params.id, req.body, {
+        const book = await Book.findByIdAndUpdate(req.params.id, req.body, {
             new: true
         });
         res.status(200).json({
@@ -59,7 +59,17 @@ exports.updateBook = async (req, res) => {
     }
 };
 
-exports.deleteBook = (req, res) => {
-    const id = req.params.id * 1;
-    res.status(204).json({ message: 'Delete a book given id', app: "booksreview"});
+exports.deleteBook = async (req, res) => {
+    try {
+        await Book.findByIdAndDelete(req.params.id);
+        res.status(204).json({
+            status: 'Success',
+            data: null
+        });
+    } catch (error) {
+        res.status(404).json({
+            status: 'fail',
+            message: error
+        });
+    }
 };
