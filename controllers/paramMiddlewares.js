@@ -1,7 +1,7 @@
 exports.checkID = (req, res, next, value) => {
     console.log(`Tour id is: ${value}`);
   
-    if (req.params.id * 1 > books.length) {
+    if (!req.params.id) {
       return res.status(404).json({
         status: 'fail',
         message: 'Invalid ID'
