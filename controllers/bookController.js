@@ -3,12 +3,17 @@ const Book = require('./../models/bookModel');
 // Routes handlers
 exports.getAllBooks = async (req, res) => {
     try {
-        // buid a query
+        // buid a filter query
         const queryObj = { ...req.query };
         const removedFields = ['page', 'sort', 'limit', 'fields'];
         removedFields.forEach(el => delete queryObj[el]);
 
-        const query = Book.find(queryObj);
+        // Advanced filtering
+        let queryStr = JSON.stringify(queryObj);
+
+        queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
+
+        const query = Book.find(JSON.parse(queryStr));
 
         // execute a query
         const books = await query;
