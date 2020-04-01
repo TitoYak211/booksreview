@@ -1,6 +1,68 @@
 const Book = require('./../models/bookModel');
 
 // Routes handlers
+class BooksFeatures {
+    constructor(query, queryString) {
+        this.query = query;
+        this.queryString = queryString;
+    };
+
+    filter() {
+        // Buid a filter query
+        const queryObj = { ...this.queryString };
+        const removedFields = ['page', 'sort', 'limit', 'fields'];
+        removedFields.forEach(el => delete queryObj[el]);
+
+        // Advanced filtering
+        let queryStr = JSON.stringify(queryObj);
+
+        queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
+
+        this.query = this.query.find(JSON.parse(queryStr));
+
+        return this;
+    };
+
+    sort() {
+        // Sorting books based on query object
+        if (this.queryString.sort) {
+            const sortBy = this.queryString.sort.split(',').join(' ');
+            this.query = this.query.sort(sortBy);
+        } else {
+            this.query = this.query.sort('-year');
+        };
+
+        return this;
+    };
+
+    displayFields() {
+        // Fields limiting
+        if (this.queryString.fields) {
+            const fields = this.queryString.fields.split(',').join(' ');
+            this.query = this.query.select(fields);
+        } else {
+            this.query = this.query.select('-__v');
+        };
+
+        return this;
+    };
+
+    paginate() {
+        // PAGINATION: Default page is 1
+        const page = this.queryString.page * 1 || 1;
+
+        // Default number of books per page = 100
+        const limit = this.queryString.limit * 1 || 100;
+
+        // Number of books to skip for the requested page
+        const skipValue = (page - 1) * limit;
+
+        this.query = this.query.skip(skipValue).limit(limit);
+
+        return this;
+    };
+};
+
 exports.popularBooks = async (req, res, next) => {
     try {
         req.query.limit = 10;
@@ -16,59 +78,16 @@ exports.popularBooks = async (req, res, next) => {
 
 exports.getAllBooks = async (req, res) => {
     try {
-        // buid a filter query
-        const queryObj = { ...req.query };
-        const removedFields = ['page', 'sort', 'limit', 'fields'];
-        removedFields.forEach(el => delete queryObj[el]);
+        // Execute a query
+        const features = new BooksFeatures(Book.find(), req.query)
+            .filter()
+            .sort()
+            .displayFields()
+            .paginate();
 
-        // Advanced filtering
-        let queryStr = JSON.stringify(queryObj);
+        const books = await features.query;
 
-        queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
-
-        let query = Book.find(JSON.parse(queryStr));
-
-        // Sorting books based on query object
-        if (req.query.sort) {
-            const sortBy = req.query.sort.split(',').join(' ');
-            query = query.sort(sortBy);
-        } else {
-            query = query.sort('-year');
-        };
-
-        // Fields limiting
-        if (req.query.fields) {
-            const fields = req.query.fields.split(',').join(' ');
-            query = query.select(fields);
-        } else {
-            query = query.select('-__v');
-        };
-
-        // PAGINATION: Default page is 1
-        const page = req.query.page * 1 || 1;
-
-        // Default number of books per page = 100
-        const limit = req.query.limit * 1 || 100;
-
-        // Number of books to skip for the requested page
-        const skipValue = (page - 1) * limit;
-
-        query = query.skip(skipValue).limit(limit);
-
-        if (req.query.page) {
-            // Count number of books in the DB
-            const numBooks = await Book.countDocuments();
-            
-            // check if the requested page has books
-            if (skipValue >= numBooks) {
-                throw new ERROR ('This page does not exist');
-            };
-        };
-
-        // execute a query
-        const books = await query;
-
-        // send a response
+        // Send a response
         res.status(200).json({
             status: 'Success',
             result: books.length,
