@@ -23,6 +23,14 @@ exports.getAllBooks = async (req, res) => {
             query = query.sort('-year');
         };
 
+        // Fields limiting
+        if (req.query.fields) {
+            const fields = req.query.fields.split(',').join(' ');
+            query = query.select(fields);
+        } else {
+            query = query.select('-_v');
+        };
+
         // execute a query
         const books = await query;
 
