@@ -31,6 +31,27 @@ exports.getAllBooks = async (req, res) => {
             query = query.select('-__v');
         };
 
+        // PAGINATION: Default page is 1
+        const page = req.query.page * 1 || 1;
+
+        // Default number of books per page = 100
+        const limit = req.query.limit * 1 || 100;
+
+        // Number of books to skip for the requested page
+        const skipValue = (page - 1) * limit;
+
+        query = query.skip(skipValue).limit(limit);
+
+        if (req.query.page) {
+            // Count number of books in the DB
+            const numBooks = await Book.countDocuments();
+            
+            // check if the requested page has books
+            if (skipValue >= numBooks) {
+                throw new ERROR ('This page does not exist');
+            };
+        };
+
         // execute a query
         const books = await query;
 
