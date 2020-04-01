@@ -1,6 +1,19 @@
 const Book = require('./../models/bookModel');
 
 // Routes handlers
+exports.popularBooks = async (req, res, next) => {
+    try {
+        req.query.limit = 10;
+        req.query.fields = 'author,title,year'
+    } catch (error) {
+        res.status(404).json({
+            status: 'fail',
+            message: error
+        });
+    };
+    next();
+};
+
 exports.getAllBooks = async (req, res) => {
     try {
         // buid a filter query
