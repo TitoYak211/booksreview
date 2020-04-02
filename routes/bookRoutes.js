@@ -10,6 +10,8 @@ const router = express.Router();
 
 router.route('/popular-books').get(bookController.popularBooks, bookController.getAllBooks);
 
+router.route('/books-stats').get(bookController.getBooksStats);
+
 router.route('/')
     .get(bookController.getAllBooks)
     .post(bookController.addBook);

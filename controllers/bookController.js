@@ -96,3 +96,33 @@ exports.deleteBook = async (req, res) => {
         });
     }
 };
+
+exports.getBooksStats = async (req, res) => {
+    try {
+        const stats = await Book.aggregate([
+            {
+                $match: { year: { $gte: 2015 } }
+            },
+            {
+                $group: {
+                    _id: '$year',
+                    numBooks: { sum: 1 }
+                }
+            },
+            {
+                $sort: { numBooks: 1 }
+            }
+        ]);
+        res.status(200).json({
+            status: 'Success',
+            data: {
+                stats
+            }
+        });
+    } catch (error) {
+        res.status(404).json({
+            status: 'fail',
+            message: error
+        });
+    }
+};
