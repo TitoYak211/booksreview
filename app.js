@@ -19,4 +19,12 @@ app.use((req, res, next) => {
 app.use('/api/books', bookRouter);
 app.use('/api/users', userRouter);
 
+// Handle unhandled routes
+app.all('*', (req, res, next) => {
+    res.status(404).JSON({
+        status: 'fail',
+        message: `Can't find ${req.originalUrl} on this server!`
+    });
+});
+
 module.exports = app;
