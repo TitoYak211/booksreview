@@ -25,6 +25,8 @@ app.all('*', (req, res, next) => {
         status: 'fail',
         message: `Can't find ${req.originalUrl} on this server!`
     });
+
+    next();
 });
 
 module.exports = app;
