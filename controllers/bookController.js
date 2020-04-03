@@ -1,129 +1,88 @@
 const Book = require('./../models/bookModel');
 const BooksFeatures = require('./../utilities/features');
+const catchAsync = require('./../utilities/catchAsync');
 
 // ROUTES HANDLERS
-exports.popularBooks = async (req, res, next) => {
-    try {
-        req.query.limit = 10;
-        req.query.fields = 'author,title,year'
-    } catch (error) {
-        res.status(404).json({
-            status: 'fail',
-            message: error
-        });
-    };
+exports.popularBooks = catchAsync(async (req, res, next) => {
+    req.query.limit = 10;
+    req.query.fields = 'author,title,year';
     next();
-};
+});
 
-exports.getAllBooks = async (req, res) => {
-    try {
-        // Execute a query
-        const features = new BooksFeatures(Book.find(), req.query)
-            .filter()
-            .sort()
-            .displayFields()
-            .paginate();
+exports.getAllBooks = catchAsync(async (req, res, next) => {
+    // Execute a query
+    const features = new BooksFeatures(Book.find(), req.query)
+    .filter()
+    .sort()
+    .displayFields()
+    .paginate();
 
-        const books = await features.query;
+    const books = await features.query;
 
-        // Send a response
-        res.status(200).json({
-            status: 'Success',
-            result: books.length,
-            data: {
-                books
-            }
-        });
-    } catch (error) {
-        res.status(404).json({
-            status: 'fail',
-            message: error
-        });
-    }
-};
+    // Send a response
+    res.status(200).json({
+        status: 'Success',
+        result: books.length,
+        data: {
+            books
+        }
+    });
+});
 
-exports.getBook = async (req, res) => {
-    try {
-        const book = await Book.findById(req.params.id);
-        res.status(200).json({
-            status: 'Success',
-            data: {
-                book
-            }
-        });
-    } catch (error) {
-        res.status(404).json({
-            status: 'fail',
-            message: error
-        });
-    }
-};
+exports.getBook = catchAsync(async (req, res, next) => {
+    const book = await Book.findById(req.params.id);
+    res.status(200).json({
+        status: 'Success',
+        data: {
+            book
+        }
+    });
+});
 
-exports.addBook = (req, res) => {
+exports.addBook = (req, res, next) => {
     res.status(201).json({ message: 'New book added', app: "booksreview"});
 };
 
-exports.updateBook = async (req, res) => {
-    try {
-        const book = await Book.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
-            runValidators: true
-        });
-        res.status(200).json({
-            status: 'Success',
-            data: {
-                book
-            }
-        });
-    } catch (error) {
-        res.status(404).json({
-            status: 'fail',
-            message: error
-        });
-    }
-};
+exports.updateBook = catchAsync(async (req, res, next) => {
+    const book = await Book.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true
+    });
+    res.status(200).json({
+        status: 'Success',
+        data: {
+            book
+        }
+    });
+});
 
-exports.deleteBook = async (req, res) => {
-    try {
-        await Book.findByIdAndDelete(req.params.id);
-        res.status(204).json({
-            status: 'Success',
-            data: null
-        });
-    } catch (error) {
-        res.status(404).json({
-            status: 'fail',
-            message: error
-        });
-    }
-};
+exports.deleteBook = catchAsync(async (req, res, next) => {
+    await Book.findByIdAndDelete(req.params.id);
+    res.status(204).json({
+        status: 'Success',
+        data: null
+    });
+});
 
-exports.getBooksStats = async (req, res) => {
-    try {
-        const stats = await Book.aggregate([
-            {
-                $match: { year: { $gte: 2015 } }
-            },
-            {
-                $group: {
-                    _id: '$year',
-                    numBooks: { sum: 1 }
-                }
-            },
-            {
-                $sort: { numBooks: 1 }
+exports.getBooksStats = catchAsync(async (req, res, next) => {
+    const stats = await Book.aggregate([
+        {
+            $match: { year: { $gte: 2015 } }
+        },
+        {
+            $group: {
+                _id: '$year',
+                numBooks: { sum: 1 }
             }
-        ]);
-        res.status(200).json({
-            status: 'Success',
-            data: {
-                stats
-            }
-        });
-    } catch (error) {
-        res.status(404).json({
-            status: 'fail',
-            message: error
-        });
-    }
-};
+        },
+        {
+            $sort: { numBooks: 1 }
+        }
+    ]);
+    res.status(200).json({
+        status: 'Success',
+        data: {
+            stats
+        }
+    });
+});
