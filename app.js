@@ -2,6 +2,7 @@ const express = require('express')
 const app = express();
 const morgan = require('morgan');
 
+const AppError = require('./utilities/AppError');
 const bookRouter = require('./routes/bookRoutes');
 const userRouter = require('./routes/userRoutes')
 
@@ -21,12 +22,7 @@ app.use('/api/users', userRouter);
 
 // Handle unhandled routes
 app.all('*', (req, res, next) => {
-    res.status(404).JSON({
-        status: 'fail',
-        message: `Can't find ${req.originalUrl} on this server!`
-    });
-
-    next();
+    next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 
 // Global ErrorHandling middleware
