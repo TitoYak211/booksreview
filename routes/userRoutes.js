@@ -10,6 +10,9 @@ const router = express.Router();
 router.route('/signup')
     .post(paramMiddlewares.checkBody, authentication.signup);
 
+router.route('/login')
+    .post(paramMiddlewares.checkBody, authentication.login);
+
 router.route('/')
     .get(userController.getAllUsers);
 
