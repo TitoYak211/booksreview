@@ -18,8 +18,13 @@ const userSchema = new mongoose.Schema({
         required: [true, "Password is required"]
     },
     passwordConfirm: {
-      type: Number,
-      required: [true, "Please confirm your password"]
+        type: Number,
+        required: [true, "Please confirm your password"],
+        validate: {
+            validator: function (el) {
+                return el === this.password;
+            }
+        }
     },
     photo: String
   });
