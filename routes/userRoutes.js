@@ -7,11 +7,11 @@ const authentication = require('./../controllers/authentication');
 // Routes
 const router = express.Router();
 
-router.post('signup', authentication.signup);
+router.route('/signup')
+    .post(paramMiddlewares.checkBody, authentication.signup);
 
 router.route('/')
-    .get(userController.getAllUsers)
-    .post(paramMiddlewares.checkBody, userController.addUser);
+    .get(userController.getAllUsers);
 
 router.route('/:id')
     .get(userController.getUser)
