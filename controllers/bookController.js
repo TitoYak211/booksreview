@@ -1,6 +1,7 @@
 const Book = require('./../models/bookModel');
 const BooksFeatures = require('./../utilities/features');
 const catchAsync = require('./../utilities/catchAsync');
+const AppError = require('./../utilities/AppError');
 
 // ROUTES HANDLERS
 exports.popularBooks = catchAsync(async (req, res, next) => {
@@ -31,6 +32,11 @@ exports.getAllBooks = catchAsync(async (req, res, next) => {
 
 exports.getBook = catchAsync(async (req, res, next) => {
     const book = await Book.findById(req.params.id);
+
+    if (!book) {
+        return next(new AppError(`No book with id: ${req.params.id} was found.`, 404));
+    };
+
     res.status(200).json({
         status: 'Success',
         data: {
@@ -48,6 +54,11 @@ exports.updateBook = catchAsync(async (req, res, next) => {
         new: true,
         runValidators: true
     });
+
+    if (!book) {
+        return next(new AppError(`No book with id: ${req.params.id} was found.`, 404));
+    };
+
     res.status(200).json({
         status: 'Success',
         data: {
@@ -57,7 +68,12 @@ exports.updateBook = catchAsync(async (req, res, next) => {
 });
 
 exports.deleteBook = catchAsync(async (req, res, next) => {
-    await Book.findByIdAndDelete(req.params.id);
+    const book = await Book.findByIdAndDelete(req.params.id);
+
+    if (!book) {
+        return next(new AppError(`No book with id: ${req.params.id} was found.`, 404));
+    };
+
     res.status(204).json({
         status: 'Success',
         data: null
