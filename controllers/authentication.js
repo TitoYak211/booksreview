@@ -51,3 +51,23 @@ exports.login = catchAsync(async (req, res, next) => {
         token
     });
 });
+
+exports.protectRoutes = catchAsync(async (req, res, next) => {
+    // Check for token
+    let token;
+
+    if (req.headers.authorization && req.headers.authorization.startWith('Bear')) {
+        token = req.headers.authorization.split(' ')[1];
+    };
+
+    if (!token) {
+        return next(new AppError('Oops, you are not loginned for access!!'), 401);
+    };
+
+    // Validate the token
+
+    // Check if user still exists
+
+    // Check if user changed password after token issued
+    next();
+});
