@@ -1,7 +1,19 @@
+const User = require('./../models/userModel');
+const catchAsync = require('./../utilities/catchAsync');
+
 // Routes handlers
-exports.getAllUsers = (req, res) => {
-    res.status(200).json({ message: 'These are all users', app: "booksreview" });
-};
+exports.getAllUsers = catchAsync(async (req, res, next) => {
+    const users = await User.find();
+
+    // Send a response
+    res.status(200).json({
+        status: 'Success',
+        result: users.length,
+        data: {
+            users
+        }
+    });
+});
 
 exports.getUser = (req, res) => {
     const id = req.params.id * 1;
