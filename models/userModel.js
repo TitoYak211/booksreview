@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -29,6 +30,19 @@ const userSchema = new mongoose.Schema({
     photo: String
   });
   
-  const User = mongoose.model("User", userSchema);
+userSchema.pre('save', async function (next) {
+    // Check if password is modified
+    if (!this.isModified('password')) return next();
+
+    // Encripting user password with a cost of 12
+    this.password = await bcrypt.hash(this.password, 12);
+
+    // Delete confirmed password field
+    this.passwordConfirm = undefined;
+
+    next();
+});
+
+const User = mongoose.model("User", userSchema);
   
-  module.exports = User;
+module.exports = User;
