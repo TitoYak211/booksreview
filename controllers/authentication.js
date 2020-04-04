@@ -3,6 +3,12 @@ const User = require('./../models/userModel');
 const catchAsync = require('./../utilities/catchAsync');
 const AppError = require('./../utilities/AppError');
 
+const signToken = id => {
+    jwt.sign(
+        { id }, process.env.JWT_SECRET, { expiresIn: JWT_EXPIRES_IN }
+    );
+};
+
 exports.signup = catchAsync(async (req, res, next) => {
     const newUser = await User.create({
         fname: req.body.fname,
@@ -13,15 +19,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     });
 
     // Signing json web token: takes a payload, secret
-    const token = jwt.sign(
-        {
-            id: newUser._id
-        },
-        process.env.JWT_SECRET,
-        {
-            expiresIn: JWT_EXPIRES_IN
-        }
-    );
+    const token = signToken(newUser._id);
 
     res.status(201).json({
         status: 'Success',
@@ -46,7 +44,7 @@ exports.login = catchAsync(async (req, res, next) => {
     };
 
     // Send token to client
-    const token = '';
+    const token = signToken(user._id);
 
     res.status(200).json({
         status: 'Success',
