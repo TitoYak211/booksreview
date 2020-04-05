@@ -14,12 +14,12 @@ router.route('/books-stats')
     .get(bookController.getBooksStats);
 
 router.route('/')
-    .get(authentication.protectRoutes, bookController.getAllBooks)
-    .post(bookController.addBook);
+    .get(bookController.getAllBooks)
+    .post(authentication.protectRoutes, bookController.addBook);
 
 router.route('/:id')
     .get(paramMiddlewares.checkID, bookController.getBook)
-    .patch(paramMiddlewares.checkID, bookController.updateBook)
-    .delete(paramMiddlewares.checkID, bookController.deleteBook);
+    .patch(authentication.protectRoutes, paramMiddlewares.checkID, bookController.updateBook)
+    .delete(authentication.protectRoutes, paramMiddlewares.checkID, bookController.deleteBook);
 
 module.exports = router;
