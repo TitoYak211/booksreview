@@ -104,6 +104,8 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     };
 
     // Generate random reset token
+    const resetToken = user.createPasswordResetToken();
+    await user.save({ validateBeforeSave: false });
 
     // Send token to user as email
 
