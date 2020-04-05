@@ -41,7 +41,7 @@ exports.login = catchAsync(async (req, res, next) => {
     const user = await User.findOne({ email }).select('+password');
 
     if (!user || !(await user.checkPassword(password, user.password))) {
-        return next(new AppError('Incorrect email or password'), 401);
+        return next(new AppError('Incorrect email or password', 401));
     };
 
     // Send token to client
@@ -62,7 +62,7 @@ exports.protectRoutes = catchAsync(async (req, res, next) => {
     };
 
     if (!token) {
-        return next(new AppError('Oops, you are not loginned for access!!'), 401);
+        return next(new AppError('Oops, you are not loginned for access!!', 401));
     };
 
     // Validate the token
@@ -72,12 +72,12 @@ exports.protectRoutes = catchAsync(async (req, res, next) => {
     const currentUser = await User.findById(decodedPayload.id);
 
     if (!currentUser) {
-        return next(new AppError('The user for this token no longer exists!!'), 401);
+        return next(new AppError('The user for this token no longer exists!!', 401));
     };
 
     // Check if user changed password after token issued
     if (currentUser.passwordChangedAfter(decodedPayload.iat)) {
-        return next(new AppError('Password was recently changed. Please log in again!'), 401);
+        return next(new AppError('Password was recently changed. Please log in again!', 401));
     };
 
     // Grant access to protected routes
