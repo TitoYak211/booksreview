@@ -33,6 +33,11 @@ const userSchema = new mongoose.Schema({
         }
     },
     passwordChangedAt: Date,
+    userType: {
+        type: String,
+        enum: ['member', 'admin'],
+        default: 'member'
+    },
     photo: String
   });
   
