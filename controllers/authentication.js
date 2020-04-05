@@ -85,3 +85,11 @@ exports.protectRoutes = catchAsync(async (req, res, next) => {
 
     next();
 });
+
+exports.restrictRole = (...types) => {
+    return (req, res, next) => {
+        if (!types.includes(req.user.role)) {
+            return next(new AppError('Oops! You do not have permission to perform this action', 403));
+        };
+    };
+};

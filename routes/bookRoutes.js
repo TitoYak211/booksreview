@@ -20,6 +20,6 @@ router.route('/')
 router.route('/:id')
     .get(paramMiddlewares.checkID, bookController.getBook)
     .patch(authentication.protectRoutes, paramMiddlewares.checkID, bookController.updateBook)
-    .delete(authentication.protectRoutes, paramMiddlewares.checkID, bookController.deleteBook);
+    .delete(authentication.protectRoutes, authentication.restrictRole('admin'), paramMiddlewares.checkID, bookController.deleteBook);
 
 module.exports = router;
