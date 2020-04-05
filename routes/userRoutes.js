@@ -13,6 +13,9 @@ router.route('/signup')
 router.route('/login')
     .post(paramMiddlewares.checkBody, authentication.login);
 
+router.route('/forgotPassword')
+    .post(paramMiddlewares.checkBody, authentication.forgotPassword);
+
 router.route('/')
     .get(userController.getAllUsers);
 
