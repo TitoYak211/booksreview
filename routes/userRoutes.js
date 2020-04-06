@@ -16,6 +16,9 @@ router.route('/login')
 router.route('/forgotPassword')
     .post(paramMiddlewares.checkBody, authentication.forgotPassword);
 
+router.route('/resetPassword')
+    .post(paramMiddlewares.checkBody, authentication.resetPassword);
+
 router.route('/')
     .get(userController.getAllUsers);
 
