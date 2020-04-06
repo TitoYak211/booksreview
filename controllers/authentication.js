@@ -110,4 +110,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     // Send token to user as email
 
 });
+
+exports.resetPassword = (req, res, next) => {
+
 };
