@@ -157,5 +157,11 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
             $gt: Date.now
         }
     });
+    
+    // Check if there is a user
+    if (!user) {
+        return next(new AppError('The password reset token is invalid or has expired!', 400));
+    };
+
 
 };
