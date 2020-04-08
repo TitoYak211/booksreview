@@ -11,3 +11,10 @@ const sendMail = async options => {
         }
     });
 
+    // Define sending email properties
+  const mailOptions = {
+    from: 'Tito Yak <yaktito20@gmail.com>',
+    to: options.email,
+    subject: options.subject,
+    text: options.message
+  };
