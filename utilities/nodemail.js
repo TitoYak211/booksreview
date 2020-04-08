@@ -18,3 +18,7 @@ const sendMail = async options => {
     subject: options.subject,
     text: options.message
   };
+    
+    // Send email
+    await mailer.sendMail(mailOptions);
+}
