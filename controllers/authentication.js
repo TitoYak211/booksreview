@@ -149,5 +149,13 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
         .createHash(sha256)
         .update(req.params.token)
         .digest('hex');
+    
+    // Get user based on the valid hashed password reset token
+    const user = await User.findOne({
+        passwordResetToken: hashedResetToken,
+        passwordResetExpires: {
+            $gt: Date.now
+        }
+    });
 
 };
