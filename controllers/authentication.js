@@ -1,8 +1,10 @@
 const { promisify } = require('util');
 const jwt = require('jsonwebtoken');
+
 const User = require('./../models/userModel');
 const catchAsync = require('./../utilities/catchAsync');
 const AppError = require('./../utilities/AppError');
+const sendMail = require('./../utilities/nodemail')
 
 const signToken = id => {
     jwt.sign(

@@ -22,3 +22,5 @@ const sendMail = async options => {
     // Send email
     await mailer.sendMail(mailOptions);
 }
+
+module.exports = sendMail;
