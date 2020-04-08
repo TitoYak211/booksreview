@@ -115,17 +115,24 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     // Generic message
     const message = `Forgot password? Please submit new password to: ${resetLink}.\nIf you didn't initiate this process, please ignore this message.`;
 
-    // Send token to user as email
-    await sendEmail({
-        email: req.body.email,
-        subject: 'Your password reset token expires in 10 minutes',
-        message
-    });
+    try {
+        // Send token to user as email
+        await sendEmail({
+            email: req.body.email,
+            subject: 'Your password reset token expires in 10 minutes',
+            message
+        });
 
     res.status(200).json({
         status: 'Success',
         message: 'Password reset token sent to email'
-    })
+    });
+        
+    } catch (error) {
+        user.passwordResetToken = undefined;
+        user.passwordResetExpires = undefined;
+        await user.save({ validateBeforeSave: false });
+    }
 
 });
 
