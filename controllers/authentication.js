@@ -167,4 +167,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     user.password = req.body.password;
     user.passwordConfirm = req.body.passwordConfirm;
 
-};
+};    // Delete password reset properties
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+
