@@ -110,6 +110,10 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     await user.save({ validateBeforeSave: false });
 
     // Send token to user as email
+    const resetLink = `${req.protocol}://${req.get('host')}/api/users/resetPassword/${resetToken}`;
+
+    // Generic message
+    const message = `Forgot password? Please submit new password to: ${resetLink}.\nIf you didn't initiate this process, please ignore this message.`;
 
 });
 
