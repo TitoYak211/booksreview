@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const { promisify } = require('util');
 const jwt = require('jsonwebtoken');
 
@@ -142,6 +143,11 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
 });
 
-exports.resetPassword = (req, res, next) => {
+exports.resetPassword = catchAsync(async (req, res, next) => {
+    // Hash the unenscripted password reset token
+    const hashedResetToken = crypto
+        .createHash(sha256)
+        .update(req.params.token)
+        .digest('hex');
 
 };
