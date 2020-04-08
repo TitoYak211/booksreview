@@ -129,9 +129,15 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     });
         
     } catch (error) {
+        // Update reset properties
         user.passwordResetToken = undefined;
         user.passwordResetExpires = undefined;
+
+        // Save changes
         await user.save({ validateBeforeSave: false });
+
+        // Return error message
+        return next(new AppError('There was an error sending sending password reset token. Please try later!', 500));
     }
 
 });
