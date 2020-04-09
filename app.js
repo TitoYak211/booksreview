@@ -3,11 +3,13 @@ const app = express();
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
+const mongoSanitize = require('express-mongo-sanitize');
+const xss = require('xss-clean');
 
 const AppError = require('./utilities/AppError');
 const globalErrorHandler = require('./controllers/errorController')
 const bookRouter = require('./routes/bookRoutes');
-const userRouter = require('./routes/userRoutes')
+const userRouter = require('./routes/userRoutes');
 
 // Use middlewares
 app.use(helmet());
@@ -26,6 +28,10 @@ const limiter = rateLimit({
 app.use('/api', limiter);
 
 app.use(express.json());
+
+// Data sanitization against NoSQL query injection
+app.use(mongoSanitize());
+
 app.use(express.static(`{__dirname}/public`));
 
 app.use((req, res, next) => {
