@@ -19,6 +19,9 @@ router.route('/forgotPassword')
 router.route('/resetPassword/:token')
     .patch(paramMiddlewares.checkBody, authentication.resetPassword);
 
+router.route('/updatePassword')
+    .patch(paramMiddlewares.checkBody, authentication.protectRoutes, authentication.updatePassword);
+
 router.route('/')
     .get(userController.getAllUsers);
 
