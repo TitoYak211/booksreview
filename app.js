@@ -32,6 +32,9 @@ app.use(express.json());
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
 
+// Data sanitization against malicious html code
+app.use(xss());
+
 app.use(express.static(`{__dirname}/public`));
 
 app.use((req, res, next) => {
