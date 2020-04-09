@@ -25,6 +25,10 @@ router.route('/updatePassword')
 router.route('/updateCurrentUser')
     .patch(paramMiddlewares.checkBody, authentication.protectRoutes, userController.updateMe);
 
+router.route('/deleteCurrentUser')
+    .delete(paramMiddlewares.checkBody, authentication.protectRoutes, userController.deleteMe);
+
+
 router.route('/')
     .get(userController.getAllUsers);
 

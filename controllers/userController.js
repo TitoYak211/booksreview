@@ -52,6 +52,15 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     });
 });
 
+exports.deleteMe = catchAsync(async (req, res, next) => {
+    await User.findByIdAndUpdate(req.user.id, { active: false });
+
+    res.status(204).JSON({
+        status: 'Success',
+        Data: null
+    })
+})
+
 exports.getUser = (req, res) => {
     const id = req.params.id * 1;
     res.status(200).json({ message: 'Get a user by id', app: "booksreview"});
