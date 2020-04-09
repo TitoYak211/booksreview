@@ -1,7 +1,8 @@
 const express = require('express')
 const app = express();
 const morgan = require('morgan');
-const rateLimit = require('express-rate-limit')
+const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
 
 const AppError = require('./utilities/AppError');
 const globalErrorHandler = require('./controllers/errorController')
@@ -9,9 +10,11 @@ const bookRouter = require('./routes/bookRoutes');
 const userRouter = require('./routes/userRoutes')
 
 // Use middlewares
-app.use(morgan('dev'));
-app.use(express.json());
-app.use(express.static(`{__dirname}/public`));
+app.use(helmet());
+
+if (process.env.NODE_ENV) {
+    app.use(morgan('dev'));
+}
 
 // Limit the number of requests per IP address in a set time window
 const limiter = rateLimit({
@@ -21,6 +24,9 @@ const limiter = rateLimit({
 });
 
 app.use('/api', limiter);
+
+app.use(express.json());
+app.use(express.static(`{__dirname}/public`));
 
 app.use((req, res, next) => {
     req.requesTime = new Date().toISOString();
