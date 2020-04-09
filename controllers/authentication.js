@@ -13,6 +13,16 @@ const signToken = id => {
     );
 };
 
+const createSendToken = (user, statusCode, res) => {
+    const token = signToken(user._id);
+
+    res.status(statusCode).json({
+        status: 'Success',
+        token,
+        data: user
+    });
+};
+
 exports.signup = catchAsync(async (req, res, next) => {
     const newUser = await User.create({
         fname: req.body.fname,
@@ -23,13 +33,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     });
 
     // Signing json web token: takes a payload, secret
-    const token = signToken(newUser._id);
-
-    res.status(201).json({
-        status: 'Success',
-        token,
-        data: newUser
-    });
+    createSendToken(newUser, 201, res);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -48,12 +52,7 @@ exports.login = catchAsync(async (req, res, next) => {
     };
 
     // Send token to client
-    const token = signToken(user._id);
-
-    res.status(200).json({
-        status: 'Success',
-        token
-    });
+    createSendToken(user, 200, res);
 });
 
 exports.protectRoutes = catchAsync(async (req, res, next) => {
@@ -175,12 +174,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     await user.save();
 
     // Log the user in
-    const token = signToken(user._id);
-
-    res.status(200).json({
-        status: 'Success',
-        token
-    });
+    createSendToken(user, 200, res);
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
@@ -201,4 +195,5 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
     await user.save();
 
     // Log user in
+    createSendToken(user, 200, res);
 });
