@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express();
 const morgan = require('morgan');
+const rateLimit = require('express-rate-limit')
 
 const AppError = require('./utilities/AppError');
 const globalErrorHandler = require('./controllers/errorController')
@@ -11,6 +12,15 @@ const userRouter = require('./routes/userRoutes')
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.static(`{__dirname}/public`));
+
+// Limit the number of requests per IP address in a set time window
+const limiter = rateLimit({
+    max: 100,
+    windowMS: 3600000,
+    message: 'You have made too many requests from this IP address. Please try in 1 hour!!'
+});
+
+app.use('/api', limiter);
 
 app.use((req, res, next) => {
     req.requesTime = new Date().toISOString();
