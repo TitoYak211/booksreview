@@ -3,10 +3,12 @@ const express = require('express');
 const bookController = require('./../controllers/bookController');
 const paramMiddlewares = require('./../controllers/paramMiddlewares');
 const authentication = require('./../controllers/authentication');
-const reviewController = require('./../controllers/reviewController');
+const reviewRouter = require('./../routes/reviewRoutes');
 
 // Routes
 const router = express.Router();
+
+router.use('/:bookId/reviews', reviewRouter);
 
 router.route('/popular-books')
     .get(authentication.protectRoutes, bookController.popularBooks, bookController.getAllBooks);
@@ -22,8 +24,5 @@ router.route('/:id')
     .get(paramMiddlewares.checkID, bookController.getBook)
     .patch(authentication.protectRoutes, paramMiddlewares.checkID, bookController.updateBook)
     .delete(authentication.protectRoutes, authentication.restrictRole('admin'), paramMiddlewares.checkID, bookController.deleteBook);
-
-router.route('/:bookId/reviews')
-    .post(authentication.protectRoutes, reviewController.createReview);
 
 module.exports = router;
