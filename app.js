@@ -11,6 +11,7 @@ const AppError = require('./utilities/AppError');
 const globalErrorHandler = require('./controllers/errorController')
 const bookRouter = require('./routes/bookRoutes');
 const userRouter = require('./routes/userRoutes');
+const reviewRouter = require('./routes/reviewRoutes');
 
 // Use middlewares
 app.use(helmet());
@@ -51,6 +52,7 @@ app.use((req, res, next) => {
 // Mounting routes for a nicer separation of resources
 app.use('/api/books', bookRouter);
 app.use('/api/users', userRouter);
+app.use('/api/reviews', reviewRouter);
 
 // Handle unhandled routes
 app.all('*', (req, res, next) => {
