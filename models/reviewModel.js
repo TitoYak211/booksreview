@@ -33,7 +33,7 @@ const reviewSchema = new mongoose.Schema(
 );
 
 // Populate user and book objects
-reviewSchema.pre(/^find/, function () {
+reviewSchema.pre(/^find/, function (next) {
     this.populate({
         path: 'book',
         select: 'title'
@@ -41,6 +41,8 @@ reviewSchema.pre(/^find/, function () {
         path: 'user',
         select: 'name photo'
     });
+
+    next();
 });
 
 const Review = mongoose.model('Review', reviewSchema);
