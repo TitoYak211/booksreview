@@ -21,6 +21,15 @@ const bookSchema = new mongoose.Schema({
   }
 });
 
+// Virtual populate reviews
+bookSchema.virtual('reviews', {
+  ref: 'Review',
+  foreignField: 'book',
+  localField: '_id'
+});
+
+// Create a book
 const Book = mongoose.model("Book", bookSchema);
 
+// Export book schema
 module.exports = Book;
