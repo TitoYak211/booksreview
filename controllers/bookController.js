@@ -31,7 +31,7 @@ exports.getAllBooks = catchAsync(async (req, res, next) => {
 });
 
 exports.getBook = catchAsync(async (req, res, next) => {
-    const book = await Book.findById(req.params.id);
+    const book = await Book.findById(req.params.id).populate('reviews');
 
     if (!book) {
         return next(new AppError(`No book with id: ${req.params.id} was found.`, 404));
