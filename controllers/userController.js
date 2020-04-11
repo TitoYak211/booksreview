@@ -62,10 +62,8 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
     })
 })
 
-exports.getUser = (req, res) => {
-    const id = req.params.id * 1;
-    res.status(200).json({ message: 'Get a user by id', app: "booksreview"});
-};
+// Get a user
+exports.getUser = handlerFactory.getDoc(User);
 
 // Update a user
 exports.updateUser = handlerFactory.updateDoc(User);
