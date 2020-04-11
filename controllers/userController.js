@@ -67,9 +67,8 @@ exports.getUser = (req, res) => {
     res.status(200).json({ message: 'Get a user by id', app: "booksreview"});
 };
 
-exports.updateUser = (req, res) => {
-    const id = req.params.id * 1;
-    res.status(200).json({ message: 'Update a user given an id', app: "booksreview"});
-};
+// Update a user
+exports.updateUser = handlerFactory.updateDoc(User);
 
+// Delete a user
 exports.deleteUser = handlerFactory.deleteDoc(User);
