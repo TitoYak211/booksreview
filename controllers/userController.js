@@ -1,6 +1,7 @@
 const User = require('./../models/userModel');
 const catchAsync = require('./../utilities/catchAsync');
 const AppError = require('./../utilities/AppError');
+const handlerFactory = require('./handlerFactory');
 
 const filterBody = (bodyObj, ...allowedFileds) => {
     const newObj = {};
@@ -71,7 +72,4 @@ exports.updateUser = (req, res) => {
     res.status(200).json({ message: 'Update a user given an id', app: "booksreview"});
 };
 
-exports.deleteUser = (req, res) => {
-    const id = req.params.id * 1;
-    res.status(204).json({ message: 'Delete a user given an id', app: "booksreview"});
-};
+exports.deleteUser = handlerFactory.deleteDoc(User);
