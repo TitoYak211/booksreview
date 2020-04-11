@@ -1,9 +1,6 @@
 const Review = require('./../models/reviewModel');
 const handlerFactory = require('./handlerFactory');
 
-// Get all reviews
-exports.getAllReviews = handlerFactory.getAllDocs(Review);
-
 exports.setBookUserIds = (req, res, next) => {
     // Allow nested routes
     if (!req.body.book) {
@@ -16,6 +13,9 @@ exports.setBookUserIds = (req, res, next) => {
 
     next();
 };
+
+// Get all reviews
+exports.getAllReviews = handlerFactory.getAllDocs(Review);
 
 // Get a review
 exports.getReview = handlerFactory.getDoc(Review);
