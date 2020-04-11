@@ -33,6 +33,9 @@ const reviewSchema = new mongoose.Schema(
     }
 );
 
+// Prevent user from writing multiple reviews on a book
+reviewSchema.index({ book: 1, user: 1 }, { unique: true });
+
 // Populate user and book objects
 reviewSchema.pre(/^find/, function (next) {
     this.populate({
@@ -59,10 +62,17 @@ reviewSchema.statics.calculateAverageRatings = async function (bookId) {
     ]);
 
     // Update the fileds in the document(book)
-    await Book.findByIdAndUpdate(bookId, {
-        numRatings: stats[0].numRatings,
-        ratingsAverage: stats[0].ratingsAverage
-    });
+    if (stats.length > 0) {
+        await Book.findByIdAndUpdate(bookId, {
+            numRatings: stats[0].numRatings,
+            ratingsAverage: stats[0].ratingsAverage
+        });
+    } else {
+        await Book.findByIdAndUpdate(bookId, {
+            numRatings: 0,
+            ratingsAverage: 5
+        });
+    }
 };
 
 reviewSchema.post('save', function () {
