@@ -2,23 +2,8 @@ const Review = require('./../models/reviewModel');
 const catchAsync = require('./../utilities/catchAsync');
 const handlerFactory = require('./handlerFactory');
 
-exports.getAllReviews = catchAsync(async (req, res, next) => {
-    let filterObj = {};
-
-    if (req.params.bookId) {
-        filterObj = { tour: req.params.bookId };
-    };
-
-    const reviews = await Review.find(filterObj);
-
-    res.status(200).JSON({
-        status: 'Success',
-        results: reviews.length,
-        data: {
-            reviews
-        }
-    });
-});
+// Get all reviews
+exports.getAllReviews = handlerFactory.getAllDocs(Review);
 
 exports.setBookUserIds = (req, res, next) => {
     // Allow nested routes
