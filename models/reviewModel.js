@@ -43,7 +43,8 @@ reviewSchema.pre(/^find/, function (next) {
     next();
 });
 
-reviewSchema.statics.calculateAverageRatings = async function(bookId) {
+reviewSchema.statics.calculateAverageRatings = async function (bookId) {
+    // create statistics for rating-averages and number-of-ratings for a book
     const stats = await this.aggregate([
         {
             $match: { book: bookId }
