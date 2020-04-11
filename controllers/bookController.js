@@ -2,6 +2,7 @@ const Book = require('./../models/bookModel');
 const BooksFeatures = require('./../utilities/features');
 const catchAsync = require('./../utilities/catchAsync');
 const AppError = require('./../utilities/AppError');
+const handlerFactory = require('./handlerFactory');
 
 // ROUTES HANDLERS
 exports.popularBooks = catchAsync(async (req, res, next) => {
@@ -67,18 +68,7 @@ exports.updateBook = catchAsync(async (req, res, next) => {
     });
 });
 
-exports.deleteBook = catchAsync(async (req, res, next) => {
-    const book = await Book.findByIdAndDelete(req.params.id);
-
-    if (!book) {
-        return next(new AppError(`No book with id: ${req.params.id} was found.`, 404));
-    };
-
-    res.status(204).json({
-        status: 'Success',
-        data: null
-    });
-});
+exports.deleteBook = handlerFactory.deleteDoc(Book);
 
 exports.getBooksStats = catchAsync(async (req, res, next) => {
     const stats = await Book.aggregate([
