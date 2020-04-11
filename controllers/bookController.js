@@ -50,24 +50,10 @@ exports.addBook = (req, res, next) => {
     res.status(201).json({ message: 'New book added', app: "booksreview"});
 };
 
-exports.updateBook = catchAsync(async (req, res, next) => {
-    const book = await Book.findByIdAndUpdate(req.params.id, req.body, {
-        new: true,
-        runValidators: true
-    });
+// Update a book
+exports.updateBook = handlerFactory.updateDoc(Book);
 
-    if (!book) {
-        return next(new AppError(`No book with id: ${req.params.id} was found.`, 404));
-    };
-
-    res.status(200).json({
-        status: 'Success',
-        data: {
-            book
-        }
-    });
-});
-
+// Delete a book
 exports.deleteBook = handlerFactory.deleteDoc(Book);
 
 exports.getBooksStats = catchAsync(async (req, res, next) => {

@@ -13,3 +13,21 @@ exports.deleteDoc = Model => catchAsync(async (req, res, next) => {
         data: null
     });
 });
+
+exports.updateDoc = Model => catchAsync(async (req, res, next) => {
+    const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true
+    });
+
+    if (!doc) {
+        return next(new AppError(`No document with id: ${req.params.id} was found.`, 404));
+    };
+
+    res.status(200).json({
+        status: 'Success',
+        data: {
+            data: doc
+        }
+    });
+});
