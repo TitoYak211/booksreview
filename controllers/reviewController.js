@@ -33,6 +33,10 @@ exports.setBookUserIds = (req, res, next) => {
     next();
 };
 
+// Get a review
+exports.getReview = handlerFactory.getDoc(Review);
+
+// Create a review
 exports.createReview = handlerFactory.createDoc(Review);
 
 // Update review

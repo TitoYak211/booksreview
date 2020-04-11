@@ -11,6 +11,7 @@ router.route('/')
     .post(authentication.protectRoutes, reviewController.setBookUserIds, reviewController.createReview);
 
 router.route('/:id')
+    .get(authentication.protectRoutes, paramMiddlewares.checkID, reviewController.getReview)
     .patch(authentication.protectRoutes, paramMiddlewares.checkID, reviewController.updateReview)
     .delete(authentication.protectRoutes, paramMiddlewares.checkID, reviewController.deleteReview);
 
