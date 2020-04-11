@@ -1,5 +1,4 @@
 const express = require('express')
-const app = express();
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
@@ -14,6 +13,11 @@ const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 
 // Use middlewares
+const app = express();
+
+// Use pug templating engine
+app.set('view engine', 'pug');
+
 app.use(helmet());
 
 if (process.env.NODE_ENV) {
