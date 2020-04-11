@@ -18,6 +18,16 @@ const bookSchema = new mongoose.Schema({
   year: {
     type: Number,
     required: [true, "A book must have a publication year"]
+  },
+  ratingsAverage: {
+    type: Number,
+    default: 5,
+    min: [1, 'Rating must be above 1.0'],
+    max: [5, 'Rating must be less than or equal to 5.0']
+  },
+  numRatings: {
+    type: Number,
+    default: 0
   }
 });
 
