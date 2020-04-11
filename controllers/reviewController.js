@@ -1,5 +1,4 @@
 const Review = require('./../models/reviewModel');
-const catchAsync = require('./../utilities/catchAsync');
 const handlerFactory = require('./handlerFactory');
 
 // Get all reviews
