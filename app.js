@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express')
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
@@ -17,6 +18,12 @@ const app = express();
 
 // Use pug templating engine
 app.set('view engine', 'pug');
+
+// Views path
+app.set('views', path.join(__dirname, 'views'));
+
+// Serve static files
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(helmet());
 
@@ -45,8 +52,6 @@ app.use(xss());
 app.use(hpp({
     whitelist: ['year']
 }));
-
-app.use(express.static(`{__dirname}/public`));
 
 app.use((req, res, next) => {
     req.requesTime = new Date().toISOString();
