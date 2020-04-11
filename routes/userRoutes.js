@@ -18,16 +18,19 @@ router.route('/forgotPassword')
 router.route('/resetPassword/:token')
     .patch(authentication.resetPassword);
 
-router.route('/updatePassword')
-    .patch(authentication.protectRoutes, authentication.updatePassword);
+// Protect all routes below
+router.use(authentication.protectRoutes);
 
-router.get('/me', authentication.protectRoutes, userController.getMe, userController.getUser);
+router.route('/updatePassword')
+    .patch(authentication.updatePassword);
+
+router.get('/me', userController.getMe, userController.getUser);
 
 router.route('/updateMe')
-    .patch(authentication.protectRoutes, userController.updateMe);
+    .patch(userController.updateMe);
 
 router.route('/deleteMe')
-    .delete(authentication.protectRoutes, userController.deleteMe);
+    .delete(userController.deleteMe);
 
 
 router.route('/')
