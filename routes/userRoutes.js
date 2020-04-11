@@ -1,34 +1,33 @@
 const express = require('express');
 
 const userController = require('./../controllers/userController');
-const paramMiddlewares = require('./../controllers/paramMiddlewares');
 const authentication = require('./../controllers/authentication');
 
 // Routes
 const router = express.Router();
 
 router.route('/signup')
-    .post(paramMiddlewares.checkBody, authentication.signup);
+    .post(authentication.signup);
 
 router.route('/login')
-    .post(paramMiddlewares.checkBody, authentication.login);
+    .post(authentication.login);
 
 router.route('/forgotPassword')
-    .post(paramMiddlewares.checkBody, authentication.forgotPassword);
+    .post(authentication.forgotPassword);
 
 router.route('/resetPassword/:token')
-    .patch(paramMiddlewares.checkBody, authentication.resetPassword);
+    .patch(authentication.resetPassword);
 
 router.route('/updatePassword')
-    .patch(paramMiddlewares.checkBody, authentication.protectRoutes, authentication.updatePassword);
+    .patch(authentication.protectRoutes, authentication.updatePassword);
 
 router.get('/me', authentication.protectRoutes, userController.getMe, userController.getUser);
 
-router.route('/updateCurrentUser')
-    .patch(paramMiddlewares.checkBody, authentication.protectRoutes, userController.updateMe);
+router.route('/updateMe')
+    .patch(authentication.protectRoutes, userController.updateMe);
 
-router.route('/deleteCurrentUser')
-    .delete(paramMiddlewares.checkBody, authentication.protectRoutes, userController.deleteMe);
+router.route('/deleteMe')
+    .delete(authentication.protectRoutes, userController.deleteMe);
 
 
 router.route('/')
