@@ -57,6 +57,10 @@ reviewSchema.statics.calculateAverageRatings = async function(bookId) {
     ]);
 };
 
+reviewSchema.post('save', function () {
+    this.constructor.calculateAverageRatings(this.book)
+});
+
 const Review = mongoose.model('Review', reviewSchema);
 
 module.exports = Review;
