@@ -66,8 +66,15 @@ exports.getDoc = (Model, populateOptions) => catchAsync(async (req, res, next) =
 });
 
 exports.getAllDocs = Model => catchAsync(async (req, res, next) => {
+    // Allow for nested routes
+    let filterObj = {};
+
+    if (req.params.bookId) {
+        filterObj = { tour: req.params.bookId };
+    };
+
     // Execute a query
-    const features = new AppFeatures(Model.find(), req.query)
+    const features = new AppFeatures(Model.find(filterObj), req.query)
     .filter()
     .sort()
     .displayFields()
