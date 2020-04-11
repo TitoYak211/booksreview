@@ -15,20 +15,6 @@ const filterBody = (bodyObj, ...allowedFileds) => {
     });
 };
 
-// Routes handlers
-exports.getAllUsers = catchAsync(async (req, res, next) => {
-    const users = await User.find();
-
-    // Send a response
-    res.status(200).json({
-        status: 'Success',
-        result: users.length,
-        data: {
-            users
-        }
-    });
-});
-
 exports.updateMe = catchAsync(async (req, res, next) => {
     // Prevent password update
     if (req.body.password || req.body.passwordConfirm) {
@@ -61,6 +47,9 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
         Data: null
     })
 })
+
+// Get all users
+exports.getAllUsers = handlerFactory.getAllDocs(User);
 
 // Get a user
 exports.getUser = handlerFactory.getDoc(User);
