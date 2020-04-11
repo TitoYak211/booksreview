@@ -69,6 +69,19 @@ reviewSchema.post('save', function () {
     this.constructor.calculateAverageRatings(this.book)
 });
 
+// Calculate ratings after deletion/update
+reviewSchema.pre(/^findOneAnd/, async function(next) {
+    this.updatedReview = await this.findOne();
+
+    next();
+});
+
+reviewSchema.post(/^findOneAnd/, async function() {
+    this.updatedReview.constructor.calculateAverageRatings(this.updatedReview.book);
+
+    next();
+});
+
 const Review = mongoose.model('Review', reviewSchema);
 
 module.exports = Review;
