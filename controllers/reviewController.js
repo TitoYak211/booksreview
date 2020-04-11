@@ -20,7 +20,7 @@ exports.getAllReviews = catchAsync(async (req, res, next) => {
     });
 });
 
-exports.createReview = catchAsync(async (req, res, next) => {
+exports.setBookUserIds = (req, res, next) => {
     // Allow nested routes
     if (!req.body.book) {
         req.body.book = req.params.bookId;
@@ -30,15 +30,10 @@ exports.createReview = catchAsync(async (req, res, next) => {
         req.body.user = req.user.id;
     };
 
-    const newReview = await Review.create(req.body);
+    next();
+};
 
-    res.status(201).JSON({
-        status: 'Success',
-        data: {
-            review: newReview
-        }
-    });
-});
+exports.createReview = handlerFactory.createDoc(Review);
 
 // Update review
 exports.updateReview = handlerFactory.updateDoc(Review);

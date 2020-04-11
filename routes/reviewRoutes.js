@@ -8,7 +8,7 @@ const router = express.Router({ mergeParams: true });
 // Routes
 router.route('/')
     .get(reviewController.getAllReviews)
-    .post(authentication.protectRoutes, reviewController.createReview);
+    .post(authentication.protectRoutes, reviewController.setBookUserIds, reviewController.createReview);
 
 router.route('/:id')
     .patch(authentication.protectRoutes, paramMiddlewares.checkID, reviewController.updateReview)

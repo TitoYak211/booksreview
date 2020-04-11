@@ -31,3 +31,14 @@ exports.updateDoc = Model => catchAsync(async (req, res, next) => {
         }
     });
 });
+
+exports.createDoc = Model => catchAsync(async (req, res, next) => {
+    const doc = await Model.create(req.body);
+
+    res.status(201).JSON({
+        status: 'Success',
+        data: {
+            data: doc
+        }
+    });
+});
