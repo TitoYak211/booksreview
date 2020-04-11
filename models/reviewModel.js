@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Book = require('./bookModel');
 
 const reviewSchema = new mongoose.Schema(
     {
@@ -55,6 +56,12 @@ reviewSchema.statics.calculateAverageRatings = async function(bookId) {
             }
         }
     ]);
+
+    // Update the fileds in the document(book)
+    await Book.findByIdAndUpdate(bookId, {
+        numRatings: stats[0].numRatings,
+        ratingsAverage: stats[0].ratingsAverage
+    });
 };
 
 reviewSchema.post('save', function () {
