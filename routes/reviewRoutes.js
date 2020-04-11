@@ -5,14 +5,17 @@ const paramMiddlewares = require('./../controllers/paramMiddlewares');
 
 const router = express.Router({ mergeParams: true });
 
-// Routes
+router.use(authentication.protectRoutes);
+
 router.route('/')
-    .get(reviewController.getAllReviews)
-    .post(authentication.protectRoutes, reviewController.setBookUserIds, reviewController.createReview);
+    .get(authentication.restrictRole('admin'), reviewController.getAllReviews)
+    .post(reviewController.setBookUserIds, reviewController.createReview);
+
+router.use(paramMiddlewares.checkID);
 
 router.route('/:id')
-    .get(authentication.protectRoutes, paramMiddlewares.checkID, reviewController.getReview)
-    .patch(authentication.protectRoutes, paramMiddlewares.checkID, reviewController.updateReview)
-    .delete(authentication.protectRoutes, paramMiddlewares.checkID, reviewController.deleteReview);
+    .get(reviewController.getReview)
+    .patch(reviewController.updateReview)
+    .delete(reviewController.deleteReview);
 
 module.exports = router;
