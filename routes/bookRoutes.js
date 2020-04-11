@@ -17,8 +17,7 @@ router.route('/books-stats')
     .get(bookController.getBooksStats);
 
 router.route('/')
-    .get(bookController.getAllBooks)
-    .post(authentication.protectRoutes, bookController.addBook);
+    .get(bookController.getAllBooks);
 
 router.route('/:id')
     .get(paramMiddlewares.checkID, bookController.getBook)

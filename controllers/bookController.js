@@ -1,6 +1,5 @@
 const Book = require('./../models/bookModel');
 const catchAsync = require('./../utilities/catchAsync');
-const AppError = require('./../utilities/AppError');
 const handlerFactory = require('./handlerFactory');
 
 exports.popularBooks = catchAsync(async (req, res, next) => {
@@ -37,10 +36,6 @@ exports.getAllBooks = handlerFactory.getAllDocs(Book);
 
 // Get a book
 exports.getBook = handlerFactory.getDoc(Book, { path: 'reviews' });
-
-exports.addBook = (req, res, next) => {
-    res.status(201).json({ message: 'New book added', app: "booksreview"});
-};
 
 // Update a book
 exports.updateBook = handlerFactory.updateDoc(Book);
