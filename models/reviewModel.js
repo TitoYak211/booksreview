@@ -42,6 +42,21 @@ reviewSchema.pre(/^find/, function (next) {
     next();
 });
 
+reviewSchema.statics.calculateAverageRatings = async function(bookId) {
+    const stats = await this.aggregate([
+        {
+            $match: { book: bookId }
+        },
+        {
+            $group: {
+                _id: '$book',
+                numRatings: { $sum: 1 },
+                ratingsAverage: { $avg: '$ratingsAverage' }
+            }
+        }
+    ]);
+};
+
 const Review = mongoose.model('Review', reviewSchema);
 
 module.exports = Review;
