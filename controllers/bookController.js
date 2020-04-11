@@ -31,20 +31,8 @@ exports.getAllBooks = catchAsync(async (req, res, next) => {
     });
 });
 
-exports.getBook = catchAsync(async (req, res, next) => {
-    const book = await Book.findById(req.params.id).populate('reviews');
-
-    if (!book) {
-        return next(new AppError(`No book with id: ${req.params.id} was found.`, 404));
-    };
-
-    res.status(200).json({
-        status: 'Success',
-        data: {
-            book
-        }
-    });
-});
+// Get a book
+exports.getBook = handlerFactory.getDoc(Book, { path: 'reviews' });
 
 exports.addBook = (req, res, next) => {
     res.status(201).json({ message: 'New book added', app: "booksreview"});

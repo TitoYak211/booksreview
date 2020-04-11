@@ -42,3 +42,24 @@ exports.createDoc = Model => catchAsync(async (req, res, next) => {
         }
     });
 });
+
+exports.getDoc = (Model, populateOptions) => catchAsync(async (req, res, next) => {
+    let query = Model.findById(req.params.id);
+
+    if (populateOptions) {
+        query = query.populate(populateOptions);
+    };
+
+    const doc = await query;
+
+    if (!doc) {
+        return next(new AppError(`No document with id: ${req.params.id} was found.`, 404));
+    };
+
+    res.status(200).json({
+        status: 'Success',
+        data: {
+            data: doc
+        }
+    });
+});
