@@ -1,6 +1,4 @@
 exports.checkID = (req, res, next, value) => {
-    console.log(`Tour id is: ${value}`);
-  
     if (!req.params.id) {
       return res.status(404).json({
         status: 'fail',
