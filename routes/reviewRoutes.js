@@ -11,6 +11,7 @@ router.route('/')
     .post(authentication.protectRoutes, reviewController.createReview);
 
 router.route('/:id')
+    .patch(authentication.protectRoutes, paramMiddlewares.checkID, reviewController.updateReview)
     .delete(authentication.protectRoutes, paramMiddlewares.checkID, reviewController.deleteReview);
 
 module.exports = router;

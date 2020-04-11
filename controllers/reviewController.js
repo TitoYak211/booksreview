@@ -40,4 +40,8 @@ exports.createReview = catchAsync(async (req, res, next) => {
     });
 });
 
+// Update review
+exports.updateReview = handlerFactory.updateDoc(Review);
+
+// Delete review
 exports.deleteReview = handlerFactory.deleteDoc(Review);
