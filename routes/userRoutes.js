@@ -32,6 +32,8 @@ router.route('/updateMe')
 router.route('/deleteMe')
     .delete(userController.deleteMe);
 
+// Restricted to admin user
+router.use(authentication.restrictRole('admin'));
 
 router.route('/')
     .get(userController.getAllUsers);
