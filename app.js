@@ -18,7 +18,7 @@ const app = express();
 // Use pug templating engine
 app.set('view engine', 'pug');
 
-// Views path
+// Views path to templates
 app.set('views', path.join(__dirname, 'views'));
 
 // Serve static files
