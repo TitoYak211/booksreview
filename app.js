@@ -57,6 +57,11 @@ app.use((req, res, next) => {
     next();
 });
 
+// Web overview root page
+app.get('/', (req, res) => {
+    res.status(200).render('base');
+});
+
 // Mounting routes for a nicer separation of resources
 app.use('/api/books', bookRouter);
 app.use('/api/users', userRouter);
