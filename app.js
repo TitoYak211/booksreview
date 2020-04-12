@@ -13,7 +13,6 @@ const bookRouter = require('./routes/bookRoutes');
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 
-// Use middlewares
 const app = express();
 
 // Use pug templating engine
