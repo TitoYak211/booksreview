@@ -6,8 +6,20 @@ html
         link(href='https://fonts.googleapis.com/css?family=Lato:300,300i,700' rel='stylesheet')
         link(rel='stylesheet' href='css/style.css')
         link(rel='shortcut icon' type="image/png" href="#")
-        title Bookreview | Reading is Sexy
+        title Booksreview | Reading is Sexy
     body
-        header
-        section
-        footer
+        header.header
+            nav.nav.nav--books
+                a.nav__el(href='#') Trending Books
+            .book__logo
+                img(src='#' alt='Booksreview logo')
+            nav.nav.nav--user
+                //- a.nav__el(href='#') My Books
+                //- a.nav__el(href='#')
+                //-     img.nav__user-img(src='#' alt='User photo')
+                //-     span Tito Yak
+                button.nav__el Log in
+                button.nav__el.nav__el--cta Sign up
+        section.overview
+        footer.footer 
+            p.footer__copyright &copy; Copyright: Tito Yak
