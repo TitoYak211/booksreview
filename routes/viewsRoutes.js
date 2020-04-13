@@ -1,28 +1,13 @@
 const express = require('express');
+const viewsController = require('../controllers/viewsController')
 
 // Create router
 const router = express();
 
-// Web overview root page
-router.get('/', (req, res) => {
-    res.status(200).render('base', {
-        title: 'Trending Books Books',
-        user: 'Tito'
-    });
-});
-
 // Render overviewpage
-router.get('/overview', (req, res) => {
-    res.status(200).render('overview', {
-        title: 'All Books'
-    });
-});
+router.get('/', viewsController.getOverview);
 
 // Render a book page
-router.get('/book', (req, res) => {
-    res.status(200).render('book', {
-        title: 'The Litle Brown Fox'
-    });
-});
+router.get('/book', viewsController.getBook);
 
 module.exports = router;
