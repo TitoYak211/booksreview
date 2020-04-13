@@ -62,6 +62,20 @@ app.get('/', (req, res) => {
     res.status(200).render('base');
 });
 
+// Render overviewpage
+app.get('/overview', (req, res) => {
+    res.status(200).render('overview', {
+        title: 'All Books'
+    });
+});
+
+// Render a book page
+app.get('/book', (req, res) => {
+    res.status(200).render('book', {
+        title: 'The Litle Brown Fox'
+    });
+});
+
 // Mounting routes for a nicer separation of resources
 app.use('/api/books', bookRouter);
 app.use('/api/users', userRouter);
