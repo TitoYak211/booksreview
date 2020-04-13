@@ -12,6 +12,7 @@ const globalErrorHandler = require('./controllers/errorController')
 const bookRouter = require('./routes/bookRoutes');
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
+const viewsRouter = require('./routes/viewsRoutes');
 
 const app = express();
 
@@ -57,26 +58,8 @@ app.use((req, res, next) => {
     next();
 });
 
-// Web overview root page
-app.get('/', (req, res) => {
-    res.status(200).render('base');
-});
-
-// Render overviewpage
-app.get('/overview', (req, res) => {
-    res.status(200).render('overview', {
-        title: 'All Books'
-    });
-});
-
-// Render a book page
-app.get('/book', (req, res) => {
-    res.status(200).render('book', {
-        title: 'The Litle Brown Fox'
-    });
-});
-
 // Mounting routes for a nicer separation of resources
+app.use('/', viewsRouter);
 app.use('/api/books', bookRouter);
 app.use('/api/users', userRouter);
 app.use('/api/reviews', reviewRouter);
