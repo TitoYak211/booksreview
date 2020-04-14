@@ -12,10 +12,15 @@ block content
                             span= book.title
 
                     .card__details
-                        h5.card__sub-heading Author: #{book.author}
-                        h6.card__sub-heading Publication Year: #{book.year}
-                        h6.card__sub-heading Number of Ratings: #{book.numRatings}
-                        h6.card__sub-heading Ratings Average: #{book.ratingsAverage}
+                        ol
+                            li
+                                h5.card__sub-heading Author: #{book.author}
+                            li
+                                h6.card__sub-heading Publication Year: #{book.year}
+                            li
+                                h6.card__sub-heading Number of Ratings: #{book.numRatings}
+                            li
+                                h6.card__sub-heading Ratings Average: #{book.ratingsAverage}
 
                     .card__footer
                         a.btn(href='#') Details

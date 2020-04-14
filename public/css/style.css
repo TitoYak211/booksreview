@@ -142,10 +142,6 @@ flex-direction: column;
   }
 
 .card__details {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-row-gap: 1.75rem;
-    grid-column-gap: 2rem;
     padding: 2.5rem 3rem;
 }
 
