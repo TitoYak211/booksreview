@@ -35,7 +35,7 @@ body {
     padding: 0 5rem;
     height: 6rem;
     position: relative;
-    z-index: 10;
+    z-index: 100;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -148,6 +148,15 @@ flex-direction: column;
     grid-column-gap: 2rem;
     padding: 2.5rem 3rem;
 }
+
+.heading-tertirary {
+    font-size: 1.5rem;
+    text-align: right;
+    position: absolute;
+    bottom: .5rem;
+    right: 5rem;
+    width: 100%;
+  }
 
 .card__footer {
     background-color: #f7f7f7;
