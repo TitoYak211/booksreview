@@ -29,6 +29,9 @@ const bookSchema = new mongoose.Schema({
   numRatings: {
     type: Number,
     default: 0
+  },
+  image: {
+    type: String
   }
 });
 

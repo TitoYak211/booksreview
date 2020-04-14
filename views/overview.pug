@@ -7,9 +7,9 @@ block content
                 .card
                     .card__header
                         .card__picture
-                        img.card__picture-img(src='img/bookReader.jpg', alt='Book cover')
+                        img.card__picture-img(src='img/bookReader.jpg', alt=`${book.title}`)
                         h3.heading-tertirary
-                        span The Forest Hiker
+                        span= book.title
 
                     .card__details
                         h4.card__sub-heading Easy 5-day tour
