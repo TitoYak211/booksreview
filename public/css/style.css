@@ -28,3 +28,21 @@ body {
   -ms-flex-direction: column;
   flex-direction: column;
 }
+
+/* Header */
+.header {
+    background-color: #FFAB00;
+    padding: 0 5rem;
+    height: 6rem;
+    position: relative;
+    z-index: 10;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
