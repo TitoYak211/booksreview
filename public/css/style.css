@@ -137,6 +137,13 @@ flex-direction: column;
     height: 22rem;
 }
 
+.card__picture-img {
+    -o-object-fit: cover;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+  }
+
 /* Footer */
 .footer {
     background-color: #f2f2f2;
