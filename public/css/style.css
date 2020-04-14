@@ -158,6 +158,10 @@ flex-direction: column;
     width: 100%;
   }
 
+.card__sub-heading {
+    font-size: 1.2rem;
+  }
+
 .card__footer {
     background-color: #f7f7f7;
     padding: 2.5rem 3rem;
