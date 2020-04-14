@@ -99,6 +99,25 @@ body {
     position: relative;
   }
 
+.card {
+border-radius: 3px;
+overflow: hidden;
+-webkit-box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.1);
+box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.1);
+background-color: #fff;
+-webkit-transition: 0.3s all;
+transition: 0.3s all;
+-webkit-backface-visibility: hidden;
+backface-visibility: hidden;
+display: -webkit-box;
+display: -ms-flexbox;
+display: flex;
+-webkit-box-orient: vertical;
+-webkit-box-direction: normal;
+-ms-flex-direction: column;
+flex-direction: column;
+}
+
 /* Footer */
 .footer {
     background-color: #f2f2f2;
