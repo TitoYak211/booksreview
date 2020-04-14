@@ -130,19 +130,24 @@ flex-direction: column;
     position: relative;
   }
 
-.card__picture {
+.card__picture-img {
     position: relative;
     -webkit-clip-path: polygon(0 0, 100% 0%, 100% 80%, 0% 100%);
     clip-path: polygon(0 0, 100% 0%, 100% 80%, 0% 100%);
     height: 22rem;
-}
-
-.card__picture-img {
     -o-object-fit: cover;
     object-fit: cover;
     height: 100%;
     width: 100%;
   }
+
+.card__details {
+display: grid;
+grid-template-columns: 1fr 1fr;
+grid-row-gap: 1.75rem;
+grid-column-gap: 2rem;
+padding: 2.5rem 3rem;
+}
 
 /* Footer */
 .footer {
