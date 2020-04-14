@@ -78,3 +78,10 @@ body {
 .nav__el:not(:last-child) {
   margin-right: 3rem;
 }
+
+/* Footer */
+.footer {
+    background-color: #f2f2f2;
+    font-size: 1.2rem;
+    text-align: center;
+  }
