@@ -33,8 +33,7 @@ const bookSchema = new mongoose.Schema({
   },
   image: {
     type: String
-  },
-  slug: String
+  }
 });
 
 // Virtual populate reviews
@@ -42,13 +41,6 @@ bookSchema.virtual('reviews', {
   ref: 'Review',
   foreignField: 'book',
   localField: '_id'
-});
-
-// Query middleware
-bookSchema.pre('save', function(next) {
-  this.slug = slugify(this.title, { lower: true });
-
-  next();
 });
 
 // Create a book
