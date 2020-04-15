@@ -152,10 +152,11 @@ flex-direction: column;
     bottom: .5rem;
     right: 5rem;
     width: 100%;
+    color: #FFAB00;
   }
 
 .card__sub-heading {
-    font-size: 1.2rem;
+    font-size: 1.65rem;
   }
   
 .card__footer {

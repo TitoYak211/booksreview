@@ -8,19 +8,18 @@ block content
                     .card__header
                         .card__picture
                         img.card__picture-img(src='img/bookReader.jpg', alt=`${book.title}`)
-                        h3.heading-tertirary
-                            span= book.title
-
+                        h3.heading-tertirary #{book.title}
+                            
                     .card__details
-                        ol
+                        ul.card__sub-heading
                             li
-                                h5.card__sub-heading Author: #{book.author}
+                                h6 Author: #{book.author}
                             li
-                                h6.card__sub-heading Publication Year: #{book.year}
+                                h6 Publication Year: #{book.year}
                             li
-                                h6.card__sub-heading Number of Ratings: #{book.numRatings}
+                                h6 Number of Ratings: #{book.numRatings}
                             li
-                                h6.card__sub-heading Ratings Average: #{book.ratingsAverage}
+                                h6 Ratings Average: #{book.ratingsAverage}
 
                     .card__footer
                         a.btn(href='#') Details
