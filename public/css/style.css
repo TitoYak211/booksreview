@@ -151,18 +151,3 @@ body {
   }
 
 /* Book page */
-.section-header {
-  position: relative;
-  height: 38vw;
-  -webkit-clip-path: polygon(0 0, 100% 0%, 100% 85%, 0% 100%);
-  clip-path: polygon(0 0, 100% 0%, 100% 85%, 0% 100%);
-}
-
-.header__hero-img {
-  -o-object-fit: cover;
-  object-fit: cover;
-  height: 100%;
-  width: 100%;
-  -o-object-position: 50% 25%;
-  object-position: 50% 25%;
-}
