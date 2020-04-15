@@ -1,4 +1,20 @@
 extends base
 
 block content
-    h1 This is a book details page
+    main.main
+        .book
+            .book__content
+                .book__left
+                    img.book__img(src='/img/bookReader.jpg', alt='book.title')
+                    h2.book__title #{book.title}
+                    .card__details.book__details
+                        ul.card__sub-heading
+                            li
+                                h6 Author: #{book.author}
+                            li
+                                h6 Publication Year: #{book.year}
+                            li
+                                h6 Number of Ratings: #{book.numRatings}
+                            li
+                                h6 Ratings Average: #{book.ratingsAverage}
+                .book__right
