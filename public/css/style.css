@@ -100,19 +100,19 @@ body {
   }
 
 .card-container {
-max-width: 100rem;
-margin: 0 auto;
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-grid-gap: 7rem;
+    max-width: 100rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 7rem;
 }
 
 .card {
-border-radius: 3px;
-overflow: hidden;
--webkit-box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.1);
-box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.1);
-background-color: #fff;
+    border-radius: 3px;
+    overflow: hidden;
+    -webkit-box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.1);
+    background-color: #fff;
 }
 
 .card__header {
