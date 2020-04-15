@@ -151,3 +151,46 @@ body {
   }
 
 /* Book page */
+.book {
+  height: 100vh;
+}
+
+.book__content {
+  width: 75%;
+  height: 50rem;
+  background-color: #f2f2f2;
+  box-shadow: 0 2rem 4rem rgb(0, 0, 0, .2);
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  display: table;
+  overflow: hidden;
+}
+
+.book__left {
+  width: 30%;
+  display: table-cell;
+}
+
+.book__img {
+  display: block;
+  width: 100%;
+}
+
+.book__title {
+  color: #FFAB00;
+  text-align: center;
+}
+
+.book__details {
+  padding-left: 10rem;
+}
+
+.book__right {
+  width: 70%;
+  display: table-cell;
+  vertical-align: middle;
+  padding: 3rem 5rem;
+}
