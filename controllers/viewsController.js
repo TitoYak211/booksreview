@@ -11,8 +11,15 @@ exports.getOverview = catchasync(async (req, res) => {
     });
 });
 
-exports.getBook = (req, res) => {
-    res.status(200).render('book', {
-        title: 'The Litle Brown Fox'
+exports.getBook = catchasync(async (req, res) => {
+    // Get book details
+    const book = await Book.findOne({ slug: req.params.slug }).populate({
+        path: 'views',
+        fileds: 'review rating user'
     });
-};
+
+    res.status(200).render('book', {
+        title: book.title,
+        book
+    });
+});

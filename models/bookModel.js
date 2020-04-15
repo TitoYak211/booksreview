@@ -45,7 +45,7 @@ bookSchema.virtual('reviews', {
 });
 
 // Query middleware
-bookSchema.pre(/^findOne/, function(next) {
+bookSchema.pre('save', function(next) {
   this.slug = slugify(this.title, { lower: true });
 
   next();

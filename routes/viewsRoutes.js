@@ -8,6 +8,6 @@ const router = express();
 router.get('/', viewsController.getOverview);
 
 // Render a book page
-router.get('/book', viewsController.getBook);
+router.get('/book:slug', viewsController.getBook);
 
 module.exports = router;
