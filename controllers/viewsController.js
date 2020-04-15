@@ -13,7 +13,10 @@ exports.getOverview = catchasync(async (req, res) => {
 
 exports.getBook = catchasync(async (req, res) => {
     // Get book details
-    const book = await Book.findOne({ isbn: req.params.isbn });
+    const book = await Book.findOne({ isbn: req.params.isbn }).populate({
+        path: 'reviews',
+        fields: 'review rating user'
+    });
 
     if (!book) {
         return next(new AppError('There is no book with that isbn.', 404));
