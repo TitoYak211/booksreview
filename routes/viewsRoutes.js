@@ -13,4 +13,7 @@ router.get('/book/:isbn', viewsController.getBook);
 // Render login form
 router.get('/login', viewsController.getLoginForm);
 
+// Render login form
+router.get('/signup', viewsController.getSignupForm);
+
 module.exports = router;
