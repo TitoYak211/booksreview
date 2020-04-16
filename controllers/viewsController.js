@@ -11,7 +11,7 @@ exports.getOverview = catchasync(async (req, res) => {
     });
 });
 
-exports.getBook = catchasync(async (req, res) => {
+exports.getBook = catchasync(async (req, res, next) => {
     // Get book details
     const book = await Book.findOne({ isbn: req.params.isbn }).populate({
         path: 'reviews',
@@ -27,3 +27,9 @@ exports.getBook = catchasync(async (req, res) => {
         book
     });
 });
+
+exports.getLoginForm = (req, res) => {
+    res.status(200).render('login', {
+        title: 'User login form'
+    })
+}
