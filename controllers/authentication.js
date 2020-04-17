@@ -105,28 +105,29 @@ exports.protectRoutes = catchAsync(async (req, res, next) => {
 // Only for rendered pages, no errors!
 exports.isLoggedIn = async (req, res, next) => {
     if (req.cookies.jwt) {
-      try {
-        // Validate the token
-        const decodedPayload = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET);
+        try {
+            // Validate the token
+            const decodedPayload = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET);
   
-        // Check if user still exists
-        const currentUser = await User.findById(decodedPayload.id);
-        if (!currentUser) {
-          return next();
-        }
+            // Check if user still exists
+            const currentUser = await User.findById(decodedPayload.id);
+
+            if (!currentUser) {
+            return next();
+            }
   
-        // Check if user changed password after token issued
-        if (currentUser.passwordChangedAfter(decodedPayload.iat)) {
-            return next(new AppError('Password was recently changed. Please log in again!', 401));
-        };
+            // Check if user changed password after token issued
+            if (currentUser.passwordChangedAfter(decodedPayload.iat)) {
+                return next(new AppError('Password was recently changed. Please log in again!', 401));
+            };
   
-        // There is a logged in user
-        res.locals.user = currentUser;
+            // There is a logged in user
+            res.locals.user = currentUser;
           
-        return next();
-      } catch (error) {
-        return next();
-      }
+            return next();
+        } catch (error) {
+            return next(); 
+        }
     }
     
     next();
