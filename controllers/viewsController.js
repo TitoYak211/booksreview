@@ -1,5 +1,6 @@
 const Book = require('./../models/bookModel');
 const catchasync = require('./../utilities/catchAsync');
+const AppError = require('./../utilities/AppError');
 
 exports.getOverview = catchasync(async (req, res) => {
     // Get books from DB
