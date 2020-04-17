@@ -8,9 +8,9 @@ const AppError = require('./../utilities/AppError');
 const sendEmail = require('./../utilities/nodemail')
 
 const signToken = id => {
-    jwt.sign(
-        { id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN }
-    );
+    return jwt.sign({ id }, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_EXPIRES_IN
+    });
 };
 
 const createSendToken = (user, statusCode, res) => {
@@ -120,7 +120,7 @@ exports.isLoggedIn = async (req, res, next) => {
   
             // Check if user changed password after token issued
             if (currentUser.passwordChangedAfter(decodedPayload.iat)) {
-                return next(new AppError('Password was recently changed. Please log in again!', 401));
+                return next();
             };
   
             // There is a logged in user
