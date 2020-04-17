@@ -1,5 +1,6 @@
 const signupForm = document.querySelector('.signup-form');
 const loginForm = document.querySelector('.login-form');
+const logoutButton = document.querySelector('.nav__el--logout');
 
 const signup = async (name, email, password, passwordConfirm) => {
     try {
@@ -49,6 +50,26 @@ const login = async (email, password) => {
     } catch (error) {
         alert(error.response.data.message);
     }
+};
+
+const logout = async () => {
+    try {
+        const res = await axios({
+            method: 'GET',
+            url: 'http://127.0.0.1:3000/api/users/logout'
+        });
+
+        if (res.data.status === 'Success') {
+            location.reload(true);
+        };
+
+    } catch (error) {
+        alert(error.response.data.message);
+    }
+};
+
+if (logoutButton) {
+    logoutButton.addEventListener('click', logout);
 };
 
 if (signupForm) {
