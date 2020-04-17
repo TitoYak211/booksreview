@@ -1,5 +1,6 @@
 const express = require('express');
-const viewsController = require('../controllers/viewsController')
+const viewsController = require('./../controllers/viewsController');
+const authentication = require('./../controllers/authentication');
 
 // Create router
 const router = express();
@@ -8,7 +9,7 @@ const router = express();
 router.get('/', viewsController.getOverview);
 
 // Render a book page
-router.get('/book/:isbn', viewsController.getBook);
+router.get('/book/:isbn', authentication.protectRoutes, viewsController.getBook);
 
 // Render login form
 router.get('/login', viewsController.getLoginForm);

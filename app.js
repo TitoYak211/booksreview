@@ -41,7 +41,11 @@ const limiter = rateLimit({
 
 app.use('/api', limiter);
 
+// Parse data from req body
 app.use(express.json());
+
+// Parse data from cookies
+app.use(cookieParser());
 
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
