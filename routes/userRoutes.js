@@ -12,6 +12,9 @@ router.route('/signup')
 router.route('/login')
     .post(authentication.login);
 
+router.route('/logout')
+    .get(authentication.logout);
+
 router.route('/forgotPassword')
     .post(authentication.forgotPassword);
 
