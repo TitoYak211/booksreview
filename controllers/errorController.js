@@ -25,13 +25,22 @@ const handleJWTError = () =>
 const handleJWTExpiredError = () =>
   new AppError('Your token has expired! Please log in again.', 401);
 
-const sendErrorDev = (err, res) => {
-  res.status(err.statusCode).json({
-    status: err.status,
-    error: err,
-    message: err.message,
-    stack: err.stack
-  });
+const sendErrorDev = (err, req, res) => {
+  // Api error
+  if (req.originalUrl.startWith('/api')) {
+    res.status(err.statusCode).json({
+      status: err.status,
+      error: err,
+      message: err.message,
+      stack: err.stack
+    });
+  } else {
+    // Rendering error
+    res.status(err.statusCode).render('error', {
+      title: 'Oops, what happenned?',
+      message: err.message
+    })
+  };
 };
 
 const sendErrorProd = (err, res) => {
