@@ -19,6 +19,7 @@ const createSendToken = (user, statusCode, res) => {
     const cookieOptions = {
         expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 3600000),
         httpOnly: true
+        // This means the token cannot be mannipulated
     };
 
     if (process.env.NODE_ENV === 'production') {
