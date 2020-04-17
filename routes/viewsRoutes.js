@@ -3,7 +3,9 @@ const viewsController = require('./../controllers/viewsController');
 const authentication = require('./../controllers/authentication');
 
 // Create router
-const router = express();
+const router = express.Router();
+
+router.use(authentication.isLoggedIn);
 
 // Render overviewpage
 router.get('/', viewsController.getOverview);

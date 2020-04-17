@@ -1,5 +1,4 @@
 const signup = async (name, email, password, passwordConfirm) => {
-    console.log(name, email, password, passwordConfirm);
     try {
         const res = await axios({
             method: 'POST',
@@ -11,7 +10,6 @@ const signup = async (name, email, password, passwordConfirm) => {
                 passwordConfirm
             }
         })
-        console.log(res);
     } catch (error) {
         console.log(error.response.data);
     }
