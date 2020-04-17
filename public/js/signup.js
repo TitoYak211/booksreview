@@ -9,9 +9,18 @@ const signup = async (name, email, password, passwordConfirm) => {
                 password,
                 passwordConfirm
             }
-        })
+        });
+
+        if (res.data.status === 'Success') {
+            alert('You have successfully created your account!');
+
+            window.setTimeout(() => {
+                location.assign('/');
+            }, 1500);
+        };
+
     } catch (error) {
-        console.log(error.response.data);
+        alert(error.response.data.message);
     }
 };
 
