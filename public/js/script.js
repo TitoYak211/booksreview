@@ -17,10 +17,10 @@ const showAlert = (status, message) => {
     hideAlert();
 
     // Show alert as a div element
-    const alertBox = `<div> class="alert alert--${status}"> ${message} </div>`;
+    // const alertBox = `<div> class="alert alert--${status}"> ${message} </div>`;
 
     if (alertPosition) {
-        alertPosition.insertAdjacentHTML('afterbegin', alertBox);
+        alertPosition.insertAdjacentHTML('afterbegin', `<div> class="alert alert--${status}"> ${message} </div>`);
     };
 
     // Clear all alerts after 2 seconds
@@ -42,7 +42,7 @@ const signup = async (name, email, password, passwordConfirm) => {
         });
 
         if (res.data.status === 'Success') {
-            showAlert(`${res.data.status}`, 'You have successfully created your account!');
+            showAlert('success', 'You have successfully created your account!');
 
             window.setTimeout(() => {
                 location.assign('/');
@@ -67,11 +67,11 @@ const login = async (email, password) => {
         });
 
         if (res.data.status === 'Success') {
-            showAlert(`${res.data.status}`, 'You are logged in successfully!');
+            showAlert('success', 'You are logged in successfully!');
 
             window.setTimeout(() => {
                 location.assign('/');
-            }, 1500);
+            }, 3000);
         };
 
     } catch (error) {
