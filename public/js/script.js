@@ -1,9 +1,31 @@
-import axios from 'axios';
-import '@babel/polyfill';
-
 const signupForm = document.querySelector('.signup-form');
 const loginForm = document.querySelector('.login-form');
 const logoutButton = document.querySelector('.nav__el--logout');
+const alertPosition = document.querySelector('main');
+const hideAlertPosition = document.querySelector('.alert');
+
+// Hide alerts
+const hideAlert = () => {
+    if (hideAlertPosition) {
+        hideAlertPosition.parentElement.removeChild(hideAlertPosition);
+    };
+};
+
+// Show alerts
+const showAlert = (status, message) => {
+    // Hide all existing alerts
+    hideAlert();
+
+    // Show alert as a div element
+    const alertBox = `<div> class="alert alert--${status}"> ${message} </div>`;
+
+    if (alertPosition) {
+        alertPosition.insertAdjacentHTML('afterbegin', alertBox);
+    };
+
+    // Clear all alerts after 2 seconds
+    window.setTimeout(hideAlert, 2000);
+};
 
 // Sign user up
 const signup = async (name, email, password, passwordConfirm) => {
@@ -20,7 +42,7 @@ const signup = async (name, email, password, passwordConfirm) => {
         });
 
         if (res.data.status === 'Success') {
-            alert('You have successfully created your account!');
+            showAlert(`${res.data.status}`, 'You have successfully created your account!');
 
             window.setTimeout(() => {
                 location.assign('/');
@@ -28,7 +50,7 @@ const signup = async (name, email, password, passwordConfirm) => {
         };
 
     } catch (error) {
-        alert(error.response.data.message);
+        showAlert('Error', error);
     }
 };
 
@@ -45,7 +67,7 @@ const login = async (email, password) => {
         });
 
         if (res.data.status === 'Success') {
-            alert('You are logged in successfully!');
+            showAlert(`${res.data.status}`, 'You are logged in successfully!');
 
             window.setTimeout(() => {
                 location.assign('/');
@@ -53,7 +75,7 @@ const login = async (email, password) => {
         };
 
     } catch (error) {
-        alert(error.response.data.message);
+        showAlert('Error', error);
     }
 };
 
@@ -70,7 +92,7 @@ const logout = async () => {
         };
 
     } catch (error) {
-        alert(error.response.data.message);
+        showAlert('Error', error);
     }
 };
 
