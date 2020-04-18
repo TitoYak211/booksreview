@@ -1,7 +1,9 @@
+import axios from 'axios';
 const signupForm = document.querySelector('.signup-form');
 const loginForm = document.querySelector('.login-form');
 const logoutButton = document.querySelector('.nav__el--logout');
 
+// Sign user up
 const signup = async (name, email, password, passwordConfirm) => {
     try {
         const res = await axios({
@@ -28,6 +30,7 @@ const signup = async (name, email, password, passwordConfirm) => {
     }
 };
 
+// Login user
 const login = async (email, password) => {
     try {
         const res = await axios({
@@ -52,6 +55,7 @@ const login = async (email, password) => {
     }
 };
 
+// log user out
 const logout = async () => {
     try {
         const res = await axios({
@@ -68,10 +72,12 @@ const logout = async () => {
     }
 };
 
+// Execute logout
 if (logoutButton) {
     logoutButton.addEventListener('click', logout);
 };
 
+// Execute signup
 if (signupForm) {
     signupForm.addEventListener('submit', e => {
         // Disable browser's default behavior when form is submitted
@@ -88,6 +94,7 @@ if (signupForm) {
     });
 };
 
+// Execute login
 if (loginForm) {
     loginForm.addEventListener('submit', e => {
 
