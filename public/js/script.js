@@ -1,4 +1,6 @@
 import axios from 'axios';
+import '@babel/polyfill';
+
 const signupForm = document.querySelector('.signup-form');
 const loginForm = document.querySelector('.login-form');
 const logoutButton = document.querySelector('.nav__el--logout');
