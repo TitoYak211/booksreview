@@ -45,21 +45,34 @@ const sendErrorDev = (err, req, res) => {
 
 const sendErrorProd = (err, res) => {
   // Operational errors
-  if (err.isOperational) {
-    res.status(err.statusCode).json({
-      status: err.status,
-      message: err.message
-    });
+  if (req.originalUrl.startsWith('/api')) {
+    if (err.isOperational) {
+      res.status(err.statusCode).json({
+        status: err.status,
+        message: err.message
+      });
+    };
 
-    // Programming errors
-  } else {
-    console.error('ERROR 💥', err);
-
-    res.status(500).json({
+    return res.status(500).json({
       status: 'error',
       message: 'Something went very wrong!'
     });
-  }
+    
+  // Programming errors
+  };
+
+  if (err.isOperational) {
+    console.log(err);
+    return res.status(err.statusCode).render('error', {
+      title: 'Something went wrong!',
+      message: err.message
+    });
+  };
+
+  return res.status(err.statusCode).render('error', {
+    title: 'Something went wrong!',
+    msg: 'Please try again later.'
+  });
 };
 
 module.exports = (err, req, res, next) => {
