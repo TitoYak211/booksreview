@@ -17,10 +17,10 @@ const showAlert = (status, message) => {
     hideAlert();
 
     // Show alert as a div element
-    // const alertBox = `<div> class="alert alert--${status}"> ${message} </div>`;
+    const alertBox = `<div class="alert alert--${status}">${message}</div>`;
 
     if (alertPosition) {
-        alertPosition.insertAdjacentHTML('afterbegin', `<div> class="alert alert--${status}"> ${message} </div>`);
+        alertPosition.insertAdjacentHTML('afterbegin', alertBox);
     };
 
     // Clear all alerts after 2 seconds
@@ -50,7 +50,7 @@ const signup = async (name, email, password, passwordConfirm) => {
         };
 
     } catch (error) {
-        showAlert('Error', error);
+        showAlert('error', error.response.data.message);
     }
 };
 
@@ -75,7 +75,7 @@ const login = async (email, password) => {
         };
 
     } catch (error) {
-        showAlert('Error', error);
+        showAlert('error', error.response.data.message);
     }
 };
 
@@ -92,7 +92,7 @@ const logout = async () => {
         };
 
     } catch (error) {
-        showAlert('Error', error);
+        showAlert('error', error.response.data.message);
     }
 };
 
