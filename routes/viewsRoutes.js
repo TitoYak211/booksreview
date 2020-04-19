@@ -17,4 +17,7 @@ router.get('/login', authentication.isLoggedIn, viewsController.getLoginForm);
 // Render login form
 router.get('/signup', authentication.isLoggedIn, viewsController.getSignupForm);
 
+// Render user profile
+router.get('/profile', authentication.protectRoutes, viewsController.getProfile);
+
 module.exports = router;
