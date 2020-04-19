@@ -36,7 +36,7 @@ const sendErrorDev = (err, req, res) => {
     });
   } 
 
-  // Rendeing pages
+  // Rendering pages
   return res.status(err.statusCode).render('error', {
     title: 'Oops, what happenned?',
     message: err.message
