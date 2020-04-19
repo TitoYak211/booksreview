@@ -167,6 +167,6 @@ if (userDataForm) {
         const email = document.getElementById('email').value;
         
         // Update name, email
-        updateData(name, email);
+        updateData({ name, email }, 'data');
     });
 };
