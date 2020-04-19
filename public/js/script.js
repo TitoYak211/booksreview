@@ -46,7 +46,7 @@ const signup = async (name, email, password, passwordConfirm) => {
 
             window.setTimeout(() => {
                 location.assign('/');
-            }, 1500);
+            }, 1000);
         };
 
     } catch (error) {
@@ -71,7 +71,7 @@ const login = async (email, password) => {
 
             window.setTimeout(() => {
                 location.assign('/');
-            }, 3000);
+            }, 1000);
         };
 
     } catch (error) {

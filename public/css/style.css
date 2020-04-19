@@ -333,6 +333,12 @@ body {
   justify-content: center;
   margin-bottom: 1rem;
 }
+
+.error-heading {
+  color: #eb4d4b;
+  font-size: 3.5rem;
+}
+
 .error__emoji {
   font-size: 3.75rem;
   margin-left: 1rem;
