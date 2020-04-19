@@ -44,5 +44,5 @@ exports.getSignupForm = (req, res) => {
 exports.getProfile = (req, res) => {
     res.status(200).render('profile', {
         title: 'My profile'
-    })
+    });
 };
