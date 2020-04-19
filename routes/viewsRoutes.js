@@ -18,6 +18,6 @@ router.get('/login', authentication.isLoggedIn, viewsController.getLoginForm);
 router.get('/signup', authentication.isLoggedIn, viewsController.getSignupForm);
 
 // Render user profile
-router.get('/profile', authentication.protectRoutes, viewsController.getProfile);
+router.get('/profile', authentication.isLoggedIn, viewsController.getProfile);
 
 module.exports = router;
