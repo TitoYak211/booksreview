@@ -3,16 +3,16 @@ const catchAsync = require('./../utilities/catchAsync');
 const AppError = require('./../utilities/AppError');
 const handlerFactory = require('./handlerFactory');
 
-const filterBody = (bodyObj, ...allowedFileds) => {
+const filterBody = (bodyObj, ...allowedFields) => {
     const newObj = {};
 
     Object.keys(bodyObj).forEach(el => {
-        if (allowedFileds.includes(el)) {
+        if (allowedFields.includes(el)) {
             newObj[el] = bodyObj[el];
         };
-
-        return newObj;
     });
+
+    return newObj;
 };
 
 exports.getMe = (req, res, next) => {
