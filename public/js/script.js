@@ -115,7 +115,6 @@ const updateData = async (name, email) => {
 
     } catch (error) {
         showAlert('error', error.response.data.message);
-        console.log(error.response.data.message);
     }
 };
 
