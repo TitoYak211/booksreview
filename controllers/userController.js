@@ -30,14 +30,14 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     };
 
     // Update user data
-    const filteredBody = filterBody(rq.body, 'firstName', 'lastName', 'email');
+    const filteredBody = filterBody(req.body, 'name', 'email');
 
-    const currentUser = User.findByIdAndUpdate(req.user.id, filteredBody, {
+    const currentUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
         new: true,
         runValidators: true
     });
 
-    res.status(200).JSON({
+    res.status(200).json({
         status: 'Success',
         data: {
             user: currentUser
@@ -48,7 +48,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 exports.deleteMe = catchAsync(async (req, res, next) => {
     await User.findByIdAndUpdate(req.user.id, { active: false });
 
-    res.status(204).JSON({
+    res.status(204).json({
         status: 'Success',
         Data: null
     })

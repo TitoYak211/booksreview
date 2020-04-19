@@ -3,6 +3,7 @@ const loginForm = document.querySelector('.login-form');
 const logoutButton = document.querySelector('.nav__el--logout');
 const alertPosition = document.querySelector('main');
 const hideAlertPosition = document.querySelector('.alert');
+const userDataForm = document.querySelector('.form-user-data');
 
 // Hide alerts
 const hideAlert = () => {
@@ -96,6 +97,28 @@ const logout = async () => {
     }
 };
 
+// Update user data
+const updateData = async (name, email) => {
+    try {
+        const res = await axios({
+            method: 'PATCH',
+            url: 'http://127.0.0.1:3000/api/users/updateMe',
+            data: {
+                name,
+                email
+            }
+        });
+
+        if (res.data.status === 'Success') {
+            showAlert('success', 'You have successfully updated your details');
+        };
+
+    } catch (error) {
+        showAlert('error', error.response.data.message);
+        console.log(error.response.data.message);
+    }
+};
+
 // Execute logout
 if (logoutButton) {
     logoutButton.addEventListener('click', logout);
@@ -131,5 +154,20 @@ if (loginForm) {
     
         // Login the user
         login(email, password);
+    });
+};
+
+// Execute updateData
+if (userDataForm) {
+    userDataForm.addEventListener('submit', e => {
+        // Disable browser's default behavior when form is submitted
+        e.preventDefault();
+
+        // Get name, email from form input fields
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        
+        // Update name, email
+        updateData(name, email);
     });
 };
