@@ -4,6 +4,7 @@ const logoutButton = document.querySelector('.nav__el--logout');
 const alertPosition = document.querySelector('main');
 const hideAlertPosition = document.querySelector('.alert');
 const userDataForm = document.querySelector('.form-user-data');
+const userPasswordForm = document.querySelector('.form-user-password');
 
 // Hide alerts
 const hideAlert = () => {
@@ -98,15 +99,17 @@ const logout = async () => {
 };
 
 // Update user data
-const updateData = async (name, email) => {
+const updateData = async (data, type) => {
     try {
+        const url =
+            type === 'password'
+                ? 'http://127.0.0.1:3000/api/users/updatePassword'
+                : 'http://127.0.0.1:3000/api/users/updateMe'
+
         const res = await axios({
             method: 'PATCH',
-            url: 'http://127.0.0.1:3000/api/users/updateMe',
-            data: {
-                name,
-                email
-            }
+            url,
+            data
         });
 
         if (res.data.status === 'Success') {
@@ -167,6 +170,22 @@ if (userDataForm) {
         const email = document.getElementById('email').value;
         
         // Update name, email
-        updateData(name, email);
+        updateData({name, email}, 'data');
+    });
+};
+
+// Change password
+if (userPasswordForm) {
+    userPasswordForm.addEventListener('submit', e => {
+        // Disable browser's default behavior when form is submitted
+        e.preventDefault();
+
+        // Get details from form input fields
+        const passwordCurrent = document.getElementById('password-current').value;
+        const password = document.getElementById('password').value;
+        const passwordConfirm = document.getElementById('password-confirm').value;
+        
+        // Update password
+        updateData({passwordCurrent, password, passwordConfirm}, 'password');
     });
 };
