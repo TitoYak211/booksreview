@@ -186,6 +186,11 @@ if (userPasswordForm) {
         const passwordConfirm = document.getElementById('password-confirm').value;
         
         // Update password
-        await updateData({passwordCurrent, password, passwordConfirm}, 'password');
+        await updateData({ passwordCurrent, password, passwordConfirm }, 'password');
+
+        // Clear input fields
+        document.getElementById('password-current').value = '';
+        document.getElementById('password').value = '';
+        document.getElementById('password-confirm').value = '';
     });
 };
