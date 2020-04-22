@@ -176,7 +176,7 @@ if (userDataForm) {
 
 // Change password
 if (userPasswordForm) {
-    userPasswordForm.addEventListener('submit', e => {
+    userPasswordForm.addEventListener('submit', async e => {
         // Disable browser's default behavior when form is submitted
         e.preventDefault();
 
@@ -186,6 +186,6 @@ if (userPasswordForm) {
         const passwordConfirm = document.getElementById('password-confirm').value;
         
         // Update password
-        updateData({passwordCurrent, password, passwordConfirm}, 'password');
+        await updateData({passwordCurrent, password, passwordConfirm}, 'password');
     });
 };
