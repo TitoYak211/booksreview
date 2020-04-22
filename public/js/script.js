@@ -180,6 +180,9 @@ if (userPasswordForm) {
         // Disable browser's default behavior when form is submitted
         e.preventDefault();
 
+        // Indicate loading process
+        document.querySelector('.btn_save_password').textContent = 'Updating...';
+
         // Get details from form input fields
         const passwordCurrent = document.getElementById('password-current').value;
         const password = document.getElementById('password').value;
@@ -187,6 +190,9 @@ if (userPasswordForm) {
         
         // Update password
         await updateData({ passwordCurrent, password, passwordConfirm }, 'password');
+
+        // Reset button to default
+        document.querySelector('.btn_save_password').textContent = 'Save password';
 
         // Clear input fields
         document.getElementById('password-current').value = '';
