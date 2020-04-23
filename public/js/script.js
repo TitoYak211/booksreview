@@ -165,12 +165,14 @@ if (userDataForm) {
         // Disable browser's default behavior when form is submitted
         e.preventDefault();
 
-        // Get name, email from form input fields
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
+        // Get name, email, photo from form input fields
+        const form = new FormData();
+        form.append('name', document.getElementById('name').value);
+        form.append('email', document.getElementById('email').value);
+        form.append('photo', document.getElementById('photo').files[0]);
         
         // Update name, email
-        updateData({name, email}, 'data');
+        updateData(form, 'data');
     });
 };
 
