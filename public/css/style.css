@@ -515,6 +515,10 @@ body {
   font-size: 1.6rem;
 }
 
+.form__upload {
+  display: none;
+}
+
 .form__upload:focus + label {
   outline: 3px solid #55c57a;
   outline-offset: 3px;
