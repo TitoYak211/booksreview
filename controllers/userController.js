@@ -1,7 +1,16 @@
+const multer = require('multer');
+
 const User = require('./../models/userModel');
 const catchAsync = require('./../utilities/catchAsync');
 const AppError = require('./../utilities/AppError');
 const handlerFactory = require('./handlerFactory');
+
+// File upload for user photos
+const upload = multer({
+    dest: 'public/img/users'
+});
+
+exports.uploadUserPhoto = upload.single('photo');
 
 const filterBody = (bodyObj, ...allowedFields) => {
     const newObj = {};
