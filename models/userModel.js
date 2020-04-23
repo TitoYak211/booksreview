@@ -42,7 +42,10 @@ const userSchema = new mongoose.Schema({
         enum: ['member', 'admin'],
         default: 'member'
     },
-    photo: String
+    photo: {
+        type: String,
+        default: 'default.jpg'
+    }
   });
   
 userSchema.pre('save', async function (next) {
