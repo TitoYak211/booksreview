@@ -5,9 +5,33 @@ const catchAsync = require('./../utilities/catchAsync');
 const AppError = require('./../utilities/AppError');
 const handlerFactory = require('./handlerFactory');
 
+// File storage
+const multerStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/img/users');
+    },
+    filename: (req, file, cb) => {
+        // Get file extension
+        const ext = file.mimetype.split('/')[1];
+
+        // Save images as:
+        cb(null, `user-${req.user.id}-${Date.now()}.${ext}`);
+    }
+})
+
+// Check if the file is an image
+const multerFilter = (req, file, cb) => {
+    if (file.mimetype.startsWith('image')) {
+        cb(null, true);
+    } else {
+        cb(new AppError('This is not an image. Please upload image files only!!', 400), false)
+    }
+}
+
 // File upload for user photos
 const upload = multer({
-    dest: 'public/img/users'
+    storage: multerStorage,
+    fileFilter: multerFilter
 });
 
 exports.uploadUserPhoto = upload.single('photo');
