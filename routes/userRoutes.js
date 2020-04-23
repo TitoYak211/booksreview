@@ -30,7 +30,7 @@ router.route('/updatePassword')
 router.get('/me', userController.getMe, userController.getUser);
 
 router.route('/updateMe')
-    .patch(userController.uploadUserPhoto, userController.updateMe);
+    .patch(userController.uploadUserPhoto, userController.resizeUserPhoto, userController.updateMe);
 
 router.route('/deleteMe')
     .delete(userController.deleteMe);
