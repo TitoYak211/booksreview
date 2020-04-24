@@ -181,15 +181,11 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
     try {
         // Send token to user as email
-        await sendEmail({
-            email: req.body.email,
-            subject: 'Your password reset token expires in 10 minutes',
-            message
-        });
+        await new Email(user, resetLink).sendPasswordReset();
 
-    res.status(200).json({
-        status: 'Success',
-        message: 'Password reset token sent to email'
+        res.status(200).json({
+            status: 'Success',
+            message: 'Password reset token sent to email'
     });
         
     } catch (error) {
