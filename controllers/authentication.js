@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const User = require('./../models/userModel');
 const catchAsync = require('./../utilities/catchAsync');
 const AppError = require('./../utilities/AppError');
-const sendEmail = require('./../utilities/nodemail')
+const Email = require('./../utilities/nodemail')
 
 const signToken = id => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -46,6 +46,10 @@ exports.signup = catchAsync(async (req, res, next) => {
         password: req.body.password,
         passwordConfirm: req.body.passwordConfirm
     });
+
+    const url = `${req.protocol}://${req.get('host')}/me`;
+
+    await new Email(newUser, url).sendWelcome();
 
     // Signing json web token: takes a payload, secret
     createSendToken(newUser, 201, res);
