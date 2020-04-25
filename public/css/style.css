@@ -215,8 +215,9 @@ body {
   }
 
 .footer__copyright {
-  font-size: 1.85rem;
+  font-size: 1.4rem;
   margin-bottom: 3rem;
+  font-weight: 550;
 }
 
 /* Book page */
