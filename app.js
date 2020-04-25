@@ -7,6 +7,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
 
 const AppError = require('./utilities/AppError');
 const globalErrorHandler = require('./controllers/errorController')
@@ -57,6 +58,9 @@ app.use(xss());
 app.use(hpp({
     whitelist: ['year']
 }));
+
+// Compress text sent to clients
+app.use(compression());
 
 app.use((req, res, next) => {
     req.requesTime = new Date().toISOString();
