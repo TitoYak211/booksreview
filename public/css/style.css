@@ -57,6 +57,12 @@ body {
   align-items: center;
 }
 
+@media only screen and (max-width: 62.5em) {
+  .nav--books {
+    margin-bottom: 1.5rem;
+  }
+}
+
 /* Navigation elements */
 .nav__el,
 .nav__el:link,
