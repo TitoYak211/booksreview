@@ -63,6 +63,12 @@ body {
   }
 }
 
+@media only screen and (max-width: 37.5em) {
+  .nav--books {
+    margin-bottom: 0;
+  }
+}
+
 /* Navigation elements */
 .nav__el,
 .nav__el:link,
