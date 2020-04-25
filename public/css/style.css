@@ -69,6 +69,15 @@ body {
   }
 }
 
+.nav--user {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 1 40%;
+  flex: 0 1 40%;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
 /* Navigation elements */
 .nav__el,
 .nav__el:link,
