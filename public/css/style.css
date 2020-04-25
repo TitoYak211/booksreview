@@ -164,7 +164,6 @@ body {
   }
 
 .card__picture-img {
-    /* position: relative; */
     -webkit-clip-path: polygon(0 0, 100% 0%, 100% 80%, 0% 100%);
     clip-path: polygon(0 0, 100% 0%, 100% 80%, 0% 100%);
     height: 23rem;
@@ -212,9 +211,13 @@ body {
 /* Footer */
 .footer {
     background-color: #f2f2f2;
-    font-size: 1.2rem;
     text-align: center;
   }
+
+.footer__copyright {
+  font-size: 1.85rem;
+  margin-bottom: 3rem;
+}
 
 /* Book page */
 .book {
