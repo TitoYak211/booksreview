@@ -8,7 +8,7 @@ exports.getOverview = catchasync(async (req, res) => {
 
     res.status(200).render('overview', {
         title: 'All Books',
-        books: books.slice(0, 12)
+        books
     });
 });
 
