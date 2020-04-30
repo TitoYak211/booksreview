@@ -25,10 +25,17 @@ exports.getBook = catchasync(async (req, res, next) => {
         return next(new AppError('There is no book with that id.', 404));
     }
 
-    res.status(200).render('book', {
-        title: book.title,
-        book
-    });
+    request.get(`https://www.goodreads.com/book/isbn/${book.isbn}?key=${process.env.GOODREADS_KEY}`)
+        .then(result => {
+            parseString(result, (error, goodReadsResult) => {
+                const goodreadsBook = goodReadsResult.GoodreadsResponse.book[0];
+
+                res.status(200).render('book', {
+                    title: goodreadsBook.title,
+                    book: goodreadsBook
+                });
+            })
+        });
 });
 
 exports.getLoginForm = (req, res) => {
