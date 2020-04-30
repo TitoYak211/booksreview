@@ -41,9 +41,12 @@
     "nodemon": "^2.0.2",
     "path": "^0.12.7",
     "pug": "^2.0.4",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5",
     "sharp": "^0.25.2",
     "slugify": "^1.4.0",
     "validator": "^13.0.0",
+    "xml2js": "^0.4.23",
     "xss-clean": "^0.1.1"
   },
   "engines": {
