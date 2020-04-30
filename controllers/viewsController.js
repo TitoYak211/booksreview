@@ -28,6 +28,10 @@ exports.getBook = catchasync(async (req, res, next) => {
     request.get(`https://www.goodreads.com/book/isbn/${book.isbn}?key=${process.env.GOODREADS_KEY}`)
         .then(result => {
             parseString(result, (error, goodReadsResult) => {
+                if (error) {
+                    return next(new AppError('There is no book with that isbn.', 404));
+                }
+
                 const goodreadsBook = goodReadsResult.GoodreadsResponse.book[0];
 
                 res.status(200).render('book', {
