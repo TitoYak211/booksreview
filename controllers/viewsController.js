@@ -21,7 +21,7 @@ exports.getBook = catchasync(async (req, res, next) => {
 
     if (!book) {
         return next(new AppError('There is no book with that id.', 404));
-      }
+    }
 
     res.status(200).render('book', {
         title: book.title,
