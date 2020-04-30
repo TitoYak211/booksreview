@@ -263,6 +263,11 @@ body {
   display: table-cell;
   vertical-align: top;
   padding: 5rem;
+  background-color: #fcfcfc;
+}
+
+.description__text {
+  font-size: 1.5rem;
 }
 
 /* Login template */
