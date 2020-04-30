@@ -5,16 +5,19 @@ block content
         .book
             .book__content
                 .book__left
-                    img.book__img(src='/img/bookReader.jpg', alt='book.title')
+                    img.book__img(src=`${book.image_url}`, alt=`${book.title}`)
                     h2.book__title #{book.title}
                     .card__details.book__details
                         ul.card__sub-heading
                             li
-                                h6 Author: #{book.author}
+                                h6 Author: #{book.authors[0].author[0].name}
                             li
-                                h6 Publication Year: #{book.year}
+                                h6 Publication Year: #{book.publication_year}
                             li
-                                h6 Number of Ratings: #{book.numRatings}
+                                h6 Number of Ratings: #{book.ratings_count}
                             li
-                                h6 Ratings Average: #{book.ratingsAverage}
+                                h6 Number of Reviews: #{book.text_reviews_count}
+                            li
+                                h6 Ratings Average: #{book.average_rating}
                 .book__right
+                    .description #{book.description[0]}
