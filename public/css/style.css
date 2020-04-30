@@ -246,7 +246,7 @@ body {
 
 .book__img {
   display: block;
-  width: 100%;
+  width: 80%;
 }
 
 .book__title {
@@ -261,8 +261,8 @@ body {
 .book__right {
   width: 70%;
   display: table-cell;
-  vertical-align: middle;
-  padding: 3rem 5rem;
+  vertical-align: top;
+  padding: 5rem;
 }
 
 /* Login template */
