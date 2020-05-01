@@ -16,13 +16,13 @@ exports.getOverview = catchasync(async (req, res) => {
 
 exports.getBook = catchasync(async (req, res, next) => {
     // Get book details
-    const book = await Book.findOne({ _id: req.params.id });
+    // const book = await Book.findOne({ _id: req.params.isbn });
 
-    if (!book) {
-        return next(new AppError('There is no book with that id.', 404));
+    if (!req.params.isbn) {
+        return next(new AppError('There is no isbn in request params.', 404));
     }
 
-    request.get(`https://www.goodreads.com/book/isbn/${book.isbn}?key=${process.env.GOODREADS_KEY}`)
+    request.get(`https://www.goodreads.com/book/isbn/${req.params.isbn}?key=${process.env.GOODREADS_KEY}`)
         .then(result => {
             parseString(result, (error, goodReadsResult) => {
                 if (error) {

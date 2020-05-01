@@ -9,7 +9,7 @@ const router = express.Router();
 router.get('/', authentication.isLoggedIn, viewsController.getOverview);
 
 // Render a book page
-router.get('/book/:id', authentication.protectRoutes, viewsController.getBook);
+router.get('/book/:isbn', authentication.protectRoutes, viewsController.getBook);
 
 // Render login form
 router.get('/login', authentication.isLoggedIn, viewsController.getLoginForm);
