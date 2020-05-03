@@ -3,6 +3,11 @@ const catchasync = require('./../utilities/catchAsync');
 const AppError = require('./../utilities/AppError');
 const request = require('request-promise');
 const parseString = require('xml2js').parseString;
+const http = require('http');
+const https = require('https');
+
+http.globalAgent.maxSockets = 1;
+https.globalAgent.maxSockets = 1;
 
 exports.getOverview = catchasync(async (req, res) => {
     // Get books from DB
