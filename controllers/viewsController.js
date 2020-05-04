@@ -1,8 +1,10 @@
 const Book = require('./../models/bookModel');
 const catchasync = require('./../utilities/catchAsync');
 const AppError = require('./../utilities/AppError');
-const request = require('request-promise');
+const got = require('got');
+const {promisify} = require('util');
 const parseString = require('xml2js').parseString;
+const ps = promisify(parseString);
 const http = require('http');
 const https = require('https');
 
@@ -26,21 +28,14 @@ exports.getBook = catchasync(async (req, res, next) => {
     }
 
     // Get book details
-    request.get(`https://www.goodreads.com/book/isbn/${req.params.isbn}?key=${process.env.GOODREADS_KEY}`)
-        .then(result => {
-            parseString(result, (error, goodReadsResult) => {
-                if (error) {
-                    return next(new AppError('There is no book with that isbn.', 404));
-                }
+    const response = await got(`https://www.goodreads.com/book/isbn/${req.params.isbn}?key=${process.env.GOODREADS_KEY}`);
+    const bookData = await ps(response.body);
+    const goodreadsBook = bookData.GoodreadsResponse.book[0];
 
-                const goodreadsBook = goodReadsResult.GoodreadsResponse.book[0];
-
-                res.status(200).render('book', {
-                    title: goodreadsBook.title,
-                    book: goodreadsBook
-                });
-            })
-        });
+    res.status(200).render('book', {
+        title: goodreadsBook.title,
+        book: goodreadsBook
+    });
 });
 
 exports.getLoginForm = (req, res) => {
