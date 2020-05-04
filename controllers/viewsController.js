@@ -11,6 +11,26 @@ const https = require('https');
 http.globalAgent.maxSockets = 1;
 https.globalAgent.maxSockets = 1;
 
+// Return books array from goodreads as a promise  
+const goodreads = async () => {
+    // Get books from DB
+    const books = await Book.find();
+
+    // Get all books details as array
+    const booksArray = await Promise.all(books.map(async (book) => {
+        // Make request for each book
+        const response = await got(`https://www.goodreads.com/book/isbn/${book.isbn}?key=${process.env.GOODREADS_KEY}`);
+
+        // Convert xml response to js
+        const bookData = await ps(response.body);
+
+        // Return book data
+        return bookData.GoodreadsResponse.book[0];
+    }));
+
+    return booksArray;
+}
+
 exports.getOverview = catchasync(async (req, res) => {
     // Get books from DB
     const books = await Book.find();
