@@ -32,8 +32,9 @@ const bookSchema = new mongoose.Schema({
     default: 0
   },
   image: {
-    type: String
-  }
+    type: String,
+    default: 'bookReader.jpg'
+}
 });
 
 // Virtual populate reviews
