@@ -122,6 +122,17 @@ const updateData = async (data, type) => {
     }
 };
 
+const searchBook = async (keyword) => {
+    try {
+        const res = await axios({
+            method: 'GET',
+            url: `http://127.0.0.1:3000/?keyword=${keyword}`
+        });
+    } catch (error) {
+        showAlert('error', error.response.data.message);
+    }
+}
+
 // Execute logout
 if (logoutButton) {
     logoutButton.addEventListener('click', logout);
