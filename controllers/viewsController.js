@@ -40,6 +40,10 @@ exports.getOverview = catchasync(async (req, res) => {
     // If there is no keyword
     let keyword = `.*`;
 
+    if (keywordInit) {
+        keyword = `${keywordInit}`;
+    }
+
 
     res.status(200).render('overview', {
         title: 'All Books',
