@@ -216,7 +216,7 @@ if (userPasswordForm) {
 };
 
 if (searchForm) {
-    searchForm.addEventListener('submit', e => {
+    searchForm.addEventListener('submit', async e => {
         // Disable browser's default behavior when form is submitted
         e.preventDefault();
 
@@ -224,5 +224,5 @@ if (searchForm) {
 
         // Make a GET request to the books route, searching for keyword
         await searchBook(keyword);
-    })
-}
+    });
+};
