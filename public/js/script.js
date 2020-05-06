@@ -5,6 +5,7 @@ const alertPosition = document.querySelector('main');
 const hideAlertPosition = document.querySelector('.alert');
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
+const searchForm = document.querySelector('.search__form');
 
 // Hide alerts
 const hideAlert = () => {
