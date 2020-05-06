@@ -34,6 +34,12 @@ const goodreads = async () => {
 exports.getOverview = catchasync(async (req, res) => {
     // Get books from DB
     const books = await Book.find();
+    // Get keyword from request
+    const keywordInit = req.query.keyword;
+    
+    // If there is no keyword
+    let keyword = `.*`;
+
 
     res.status(200).render('overview', {
         title: 'All Books',
