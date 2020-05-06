@@ -214,3 +214,15 @@ if (userPasswordForm) {
         document.getElementById('password-confirm').value = '';
     });
 };
+
+if (searchForm) {
+    searchForm.addEventListener('submit', e => {
+        // Disable browser's default behavior when form is submitted
+        e.preventDefault();
+
+        const keyword = searchForm.querySelector('input[name=keyword]').value;
+
+        // Make a GET request to the books route, searching for keyword
+        await searchBook(keyword);
+    })
+}
