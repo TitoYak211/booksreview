@@ -32,8 +32,6 @@ const goodreads = async () => {
 }
 
 exports.getOverview = catchasync(async (req, res) => {
-    // Get books from DB
-    const books = await Book.find();
     // Get keyword from request
     const keywordInit = req.query.keyword;
     
@@ -44,6 +42,8 @@ exports.getOverview = catchasync(async (req, res) => {
         keyword = `${keywordInit}`;
     }
 
+    // Return books with matches
+    const books = await Book.find({ $or: [{ isbn: { $regex: new RegExp(keyword, `i`) } }, { author: { $regex: new RegExp(keyword, `i`) } }, { title: { $regex: new RegExp(keyword, `i`) } }] });
 
     res.status(200).render('overview', {
         title: 'All Books',
