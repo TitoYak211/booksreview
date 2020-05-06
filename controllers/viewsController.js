@@ -45,6 +45,7 @@ exports.getOverview = catchasync(async (req, res) => {
     // Return books with matches
     const books = await Book.find({ $or: [{ isbn: { $regex: new RegExp(keyword, `i`) } }, { author: { $regex: new RegExp(keyword, `i`) } }, { title: { $regex: new RegExp(keyword, `i`) } }] });
 
+    // Display matches for client
     res.status(200).render('overview', {
         title: 'All Books',
         books
