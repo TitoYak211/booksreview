@@ -136,7 +136,7 @@ body {
 /* Block Content */
 .main {
   background-color: #f2f2f2;
-  padding: 8rem 8rem;
+  padding: 6rem 8rem;
   -webkit-box-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -246,7 +246,7 @@ body {
 
 .book__img {
   display: block;
-  width: 100%;
+  width: 80%;
 }
 
 .book__title {
@@ -322,6 +322,7 @@ body {
   box-sizing: border-box;
 }
 
+.search__input:focus,
 .form__input:focus {
   outline: none;
   border-bottom: 3px solid #55c57a;
@@ -591,4 +592,30 @@ body {
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
   -webkit-transform: translateY(-2px);
   transform: translateY(-2px);
+}
+
+.search__input {
+  text-align: center;
+  background-color: #fff;
+  display: block;
+  font-family: inherit;
+  font-size: 1.5rem;
+  color: inherit;
+  margin-right: 2rem;
+  border: none;
+  width: 70%;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  border-radius: 5px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.search__form {
+  display: flex;
+  padding-bottom: 3rem;
+  max-width: 768px;
+  margin: 0 auto;
 }
