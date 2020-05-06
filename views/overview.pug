@@ -3,7 +3,7 @@ extends base
 block content
     main.main
         form.search__form
-            input.search__input(name='keyword' type='text' placeholder='Search books here by their titles or authors\' names')
+            input.search__input(name='keyword' type='text' placeholder='Search books by isbn\'s, titles,  or authors\' names')
             button.btn.btn--green(type='submit') Search
         .card-container
             each book in books
