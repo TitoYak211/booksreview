@@ -9,7 +9,7 @@ block content
             each book in books
                 .card
                     .card__header
-                        img.card__picture-img(src='/img/bookReader.jpg', alt=`${book.title}`)
+                        img.card__picture-img(src=`/img/${book.image}`, alt=`${book.title}`)
                         h3.heading-tertirary #{book.title}
                             
                     .card__details
