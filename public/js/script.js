@@ -35,7 +35,7 @@ const signup = async (name, email, password, passwordConfirm) => {
     try {
         const res = await axios({
             method: 'POST',
-            url: '/api/users/signup',
+            url: 'http://127.0.0.1:3000/api/users/signup',
             data: {
                 name,
                 email,
@@ -62,7 +62,7 @@ const login = async (email, password) => {
     try {
         const res = await axios({
             method: 'POST',
-            url: '/api/users/login',
+            url: 'http://127.0.0.1:3000/api/users/login',
             data: {
                 email,
                 password
@@ -87,7 +87,7 @@ const logout = async () => {
     try {
         const res = await axios({
             method: 'GET',
-            url: '/api/users/logout'
+            url: 'http://127.0.0.1:3000/api/users/logout'
         });
 
         if (res.data.status === 'Success') {
@@ -104,8 +104,8 @@ const updateData = async (data, type) => {
     try {
         const url =
             type === 'password'
-                ? '/api/users/updatePassword'
-                : '/api/users/updateMe'
+                ? 'http://127.0.0.1:3000/api/users/updatePassword'
+                : 'http://127.0.0.1:3000/api/users/updateMe'
 
         const res = await axios({
             method: 'PATCH',
@@ -126,7 +126,7 @@ const searchBook = async (keyword) => {
     try {
         const res = await axios({
             method: 'GET',
-            url: `/?keyword=${keyword}`
+            url: `http://127.0.0.1:3000/?keyword=${keyword}`
         });
     } catch (error) {
         showAlert('error', error.response.data.message);
