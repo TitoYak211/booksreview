@@ -1,7 +1,6 @@
 const express = require('express');
 
 const bookController = require('./../controllers/bookController');
-const paramMiddlewares = require('./../controllers/paramMiddlewares');
 const authentication = require('./../controllers/authentication');
 const reviewRouter = require('./../routes/reviewRoutes');
 
@@ -20,9 +19,6 @@ router.route('/popular-books')
 
 router.route('/books-stats')
     .get(bookController.getBooksStats);
-
-
-router.use(paramMiddlewares.checkID);
 
 router.route('/:id')
     .get(bookController.getBook)
