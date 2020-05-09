@@ -1,0 +1,555 @@
+{
+	"info": {
+		"_postman_id": "28a74fb2-cbaf-4ed6-808e-7d1be785836c",
+		"name": "booksreview",
+		"description": "These are booksreview project API endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "bookControllers",
+			"item": [
+				{
+					"name": "getAllbooks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/books",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a book",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/books/5e80223092cc5b8b2a8e5eb6",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"books",
+								"5e80223092cc5b8b2a8e5eb6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a book",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/books/5e80223092cc5b8b2a8e5eb6",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"books",
+								"5e80223092cc5b8b2a8e5eb6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a book",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/books/5e80223092cc5b8b2a8e5eb6",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"books",
+								"5e80223092cc5b8b2a8e5eb6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add a book DB",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/books",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get New books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/books/popular-books",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"books",
+								"popular-books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get books stats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/books/books-stats",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"books",
+								"books-stats"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "userController",
+			"item": [
+				{
+					"name": "Get all users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/users",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/users/5",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"users",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register a new user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Tito\",\n\t\"email\": \"yaktito20@gmail.com\",\n\t\"password\": \"Madhangayai25\",\n\t\"passwordConfirm\": \"Madhangayai25\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/users/signup",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user details",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/users/5",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"users",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/users/5ea865b3b51dd8ca797cb855",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"users",
+								"5ea865b3b51dd8ca797cb855"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login users",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"yaktito20@gmail.com\",\n\t\"password\": \"Madhangayai25\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/users/login",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get current user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/users/me",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete current user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/users/deleteMe",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"users",
+								"deleteMe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Current User",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/users/updateMe",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"users",
+								"updateMe"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "reviewsController",
+			"item": [
+				{
+					"name": "Get review by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/reviews/5",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"reviews",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin: Get all reviews ",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/reviews",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Review",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/reviews/5",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"reviews",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Review",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/reviews/5",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"reviews",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post a review",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/reviews",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a review on a book",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/books/5e80223092cc5b8b2a8e5e86/reviews",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"books",
+								"5e80223092cc5b8b2a8e5e86",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get reviews of a book",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/books/5e80223092cc5b8b2a8e5e86/reviews",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"books",
+								"5e80223092cc5b8b2a8e5e86",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Sign up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/users/signup",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/users/login",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/users/forgotPassword",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"users",
+								"forgotPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset password",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/users/resetPassword/1652bfc347b939d3d19cea352d231d6dbe6dfef0884e68e6c61629019c44b9ca",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"users",
+								"resetPassword",
+								"1652bfc347b939d3d19cea352d231d6dbe6dfef0884e68e6c61629019c44b9ca"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Current User Password",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/users/updateMyPassword",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"users",
+								"updateMyPassword"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
