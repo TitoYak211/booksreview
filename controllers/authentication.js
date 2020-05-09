@@ -49,7 +49,7 @@ exports.signup = catchAsync(async (req, res, next) => {
 
     const url = `${req.protocol}://${req.get('host')}/me`;
 
-    // await new Email(newUser, url).sendWelcome();
+    await new Email(newUser, url).sendWelcome();
 
     // Signing json web token: takes a payload, secret
     createSendToken(newUser, 201, req, res);
