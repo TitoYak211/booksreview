@@ -18,6 +18,9 @@ const viewsRouter = require('./routes/viewsRoutes');
 
 const app = express();
 
+// Trust proxies
+app.enable('trust proxy');
+
 // Use pug templating engine
 app.set('view engine', 'pug');
 
