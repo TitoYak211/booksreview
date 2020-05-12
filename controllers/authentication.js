@@ -96,7 +96,7 @@ exports.protectRoutes = catchAsync(async (req, res, next) => {
     };
 
     if (!token) {
-        return next(new AppError('Oops, you are not loginned for access!!', 401));
+        return next(new AppError('You must me logged in to access this page!!', 401));
     };
 
     // Validate the token
