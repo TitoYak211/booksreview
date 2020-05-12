@@ -155,7 +155,7 @@ exports.isLoggedIn = async (req, res, next) => {
 exports.restrictRole = (...userTypes) => {
     return (req, res, next) => {
         if (!userTypes.includes(req.user.userType)) {
-            return next(new AppError('Oops! You do not have permission to perform this action', 403));
+            return next(new AppError('Oops! You must be an administrator to perform this action', 403));
         };
     };
 };
