@@ -18,12 +18,12 @@ block content
 
                 - if (user.userType === 'admin')
                     .admin-nav
-                        h5.admin-nav__heading Admin
+                        h5.admin-nav__heading Administrator
                         ul.side-nav
                             +navItem('#', 'Manage books', 'map')
                             +navItem('#', 'Manage users', 'users')
+                            +navItem('#', 'Manage groups', 'star')
                             +navItem('#', 'Manage reviews', 'star')
-                            +navItem('#', 'My reviews', 'star')
 
             .user-view__content
                 .user-view__form-container

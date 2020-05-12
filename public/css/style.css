@@ -484,8 +484,9 @@ body {
   padding-bottom: 3px;
   font-size: 1.2rem;
   text-transform: uppercase;
-  color: #f2f2f2;
+  color: #ff7730;
   border-bottom: 1px solid currentColor;
+  text-align: center;
 }
 
 .user-view__content {
