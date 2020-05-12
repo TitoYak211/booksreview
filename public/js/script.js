@@ -91,7 +91,11 @@ const logout = async () => {
         });
 
         if (res.data.status === 'Success') {
-            location.reload(true);
+            showAlert('success', 'You have been logged out successfully!');
+
+            window.setTimeout(() => {
+                location.assign('/');
+            }, 1000);
         };
 
     } catch (error) {
