@@ -16,17 +16,11 @@ const signToken = id => {
 const createSendToken = (user, statusCode, req, res) => {
     const token = signToken(user._id);
 
-    const cookieOptions = {
+    res.cookie('jwt', token, {
         expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 3600000),
-        httpOnly: true
-        // This means the token cannot be mannipulated
-    };
-
-    if (process.env.NODE_ENV === 'production') {
-        cookieOptions.secure = true;
-    };
-
-    res.cookie('jwt', token, cookieOptions);
+        httpOnly: true,
+        secure: req.secure || req.headers('x-forwarded-proto') ==='https'
+    });
 
     user.password = undefined;
 
@@ -234,7 +228,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     await user.save();
 
     // Log the user in
-    createSendToken(user, 200, res);
+    createSendToken(user, 200, req, res);
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
@@ -255,5 +249,5 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
     await user.save();
 
     // Log user in
-    createSendToken(user, 200, res);
+    createSendToken(user, 200, req, res);
 });
