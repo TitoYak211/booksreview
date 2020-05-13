@@ -8,6 +8,7 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
+const cors = requires('cors');
 
 const AppError = require('./utilities/AppError');
 const globalErrorHandler = require('./controllers/errorController')
@@ -26,6 +27,11 @@ app.set('view engine', 'pug');
 
 // Views path to templates
 app.set('views', path.join(__dirname, 'views'));
+
+// Implement cors
+app.use(cors());
+
+app.options('*', cors());
 
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
