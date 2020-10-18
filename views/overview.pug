@@ -2,7 +2,7 @@ extends base
 
 block content
     main.main
-        form.search__form
+        form.search__form(action="/" method="GET")
             input.search__input(name='keyword' type='text' placeholder='Search books by isbn\'s, titles,  or authors\' names')
             button.btn.btn--green(type='submit') Search
         .card-container
