@@ -1,3 +1,4 @@
+// localhost: http://127.0.0.1:3000
 const signupForm = document.querySelector('.signup-form');
 const loginForm = document.querySelector('.login-form');
 const logoutButton = document.querySelector('.nav__el--logout');
