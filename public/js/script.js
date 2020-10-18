@@ -5,7 +5,7 @@ const alertPosition = document.querySelector('main');
 const hideAlertPosition = document.querySelector('.alert');
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
-const searchForm = document.querySelector('.search__form');
+// const searchForm = document.querySelector('.search__form');
 
 // Hide alerts
 const hideAlert = () => {
@@ -220,14 +220,14 @@ if (userPasswordForm) {
     });
 };
 
-if (searchForm) {
-    searchForm.addEventListener('submit', async e => {
-        // Disable browser's default behavior when form is submitted
-        e.preventDefault();
+// if (searchForm) {
+//     searchForm.addEventListener('submit', async e => {
+//         // Disable browser's default behavior when form is submitted
+//         e.preventDefault();
 
-        const keyword = searchForm.querySelector('input[name=keyword]').value;
+//         const keyword = searchForm.querySelector('input[name=keyword]').value;
 
-        // Make a GET request to the books route, searching for keyword
-        await searchBook(keyword);
-    });
-};
+//         // Make a GET request to the books route, searching for keyword
+//         await searchBook(keyword);
+//     });
+// };
