@@ -128,6 +128,7 @@ const updateData = async (data, type) => {
 
 const searchBook = async (keyword) => {
     try {
+        //Fetch the books matching query
         const res = await axios({
             method: 'GET',
             url: `/?keyword=${keyword}`
